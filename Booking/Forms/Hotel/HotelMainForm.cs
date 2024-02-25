@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,29 @@ namespace Booking.Forms.Hotel
         private void btnCreateHotel_Click(object sender, EventArgs e)
         {
             HotelCreateForm dlg = new HotelCreateForm();
-            dlg.ShowDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadList();
+            }
+        }
+
+        private void HotelMainForm_Load(object sender, EventArgs e)
+        {
+            LoadList();
+        }
+
+        private void LoadList()
+        {
+            dgvHotels.Rows.Clear();
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                var list = context.Hotels.ToList();
+                foreach (var hotel in list)
+                {
+                    object[] row = { hotel.Id, hotel.Name, hotel.Address, hotel.Description };
+                    dgvHotels.Rows.Add(row);
+                }
+            }
         }
     }
 }

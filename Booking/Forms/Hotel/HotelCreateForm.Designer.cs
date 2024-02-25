@@ -101,6 +101,7 @@
             btnCraete.TabIndex = 2;
             btnCraete.Text = "Створити";
             btnCraete.UseVisualStyleBackColor = true;
+            btnCraete.Click += btnCraete_Click;
             // 
             // btnCancel
             // 
@@ -126,7 +127,7 @@
             Controls.Add(txtName);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "HotelCreateForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "HotelCreateForm";

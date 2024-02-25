@@ -30,11 +30,17 @@
         {
             btnCreateHotel = new Button();
             label1 = new Label();
+            dgvHotels = new DataGridView();
+            ColId = new DataGridViewTextBoxColumn();
+            ColName = new DataGridViewTextBoxColumn();
+            ColAddress = new DataGridViewTextBoxColumn();
+            ColDescription = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvHotels).BeginInit();
             SuspendLayout();
             // 
             // btnCreateHotel
             // 
-            btnCreateHotel.Location = new Point(28, 100);
+            btnCreateHotel.Location = new Point(12, 99);
             btnCreateHotel.Name = "btnCreateHotel";
             btnCreateHotel.Size = new Size(133, 49);
             btnCreateHotel.TabIndex = 0;
@@ -53,17 +59,65 @@
             label1.TabIndex = 1;
             label1.Text = "Список готелів";
             // 
+            // dgvHotels
+            // 
+            dgvHotels.AllowUserToAddRows = false;
+            dgvHotels.AllowUserToDeleteRows = false;
+            dgvHotels.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvHotels.Columns.AddRange(new DataGridViewColumn[] { ColId, ColName, ColAddress, ColDescription });
+            dgvHotels.Location = new Point(12, 165);
+            dgvHotels.Name = "dgvHotels";
+            dgvHotels.ReadOnly = true;
+            dgvHotels.RowHeadersWidth = 51;
+            dgvHotels.Size = new Size(855, 305);
+            dgvHotels.TabIndex = 2;
+            // 
+            // ColId
+            // 
+            ColId.HeaderText = "Id";
+            ColId.MinimumWidth = 6;
+            ColId.Name = "ColId";
+            ColId.ReadOnly = true;
+            ColId.Width = 75;
+            // 
+            // ColName
+            // 
+            ColName.HeaderText = "Назва";
+            ColName.MinimumWidth = 6;
+            ColName.Name = "ColName";
+            ColName.ReadOnly = true;
+            ColName.Width = 200;
+            // 
+            // ColAddress
+            // 
+            ColAddress.HeaderText = "Адрес";
+            ColAddress.MinimumWidth = 6;
+            ColAddress.Name = "ColAddress";
+            ColAddress.ReadOnly = true;
+            ColAddress.Width = 150;
+            // 
+            // ColDescription
+            // 
+            ColDescription.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColDescription.HeaderText = "Опис";
+            ColDescription.MinimumWidth = 6;
+            ColDescription.Name = "ColDescription";
+            ColDescription.ReadOnly = true;
+            // 
             // HotelMainForm
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(879, 482);
+            Controls.Add(dgvHotels);
             Controls.Add(label1);
             Controls.Add(btnCreateHotel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "HotelMainForm";
             Text = "HotelMainForm";
+            Load += HotelMainForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvHotels).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -72,5 +126,10 @@
 
         private Button btnCreateHotel;
         private Label label1;
+        private DataGridView dgvHotels;
+        private DataGridViewTextBoxColumn ColId;
+        private DataGridViewTextBoxColumn ColName;
+        private DataGridViewTextBoxColumn ColAddress;
+        private DataGridViewTextBoxColumn ColDescription;
     }
 }
