@@ -1,4 +1,5 @@
-﻿using Booking.Forms.Floor;
+﻿using Booking.Forms.Apartment;
+using Booking.Forms.Floor;
 using Domain.Entities;
 using Infrastructure.Data;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Booking.Forms.Hotel
 {
@@ -52,7 +54,7 @@ namespace Booking.Forms.Hotel
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                
+
                 int hotelId = (int)dgvHotels.Rows[e.RowIndex].Cells[0].Value;
                 loadFloors(hotelId);
             }
@@ -77,19 +79,31 @@ namespace Booking.Forms.Hotel
         private void btnAddFloor_Click(object sender, EventArgs e)
         {
             int rowIndex = dgvHotels.CurrentCell.RowIndex;
-            if(rowIndex>=0)
+            if (rowIndex >= 0)
             {
                 int hotelId = (int)dgvHotels.Rows[rowIndex].Cells[0].Value;
                 string hotelName = (string)dgvHotels.Rows[rowIndex].Cells[1].Value;
                 FloorCreateForm dlg = new FloorCreateForm();
                 dlg.HotelId = hotelId;
                 dlg.HotelName = hotelName;
-                if(dlg.ShowDialog()==DialogResult.OK) {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
                     loadFloors(hotelId);
                 }
             }
-            
+        }
 
+        private void lvFloors_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // Get the item that was double-clicked
+            ListViewItem item = lvFloors.SelectedItems.Count > 0 ? lvFloors.SelectedItems[0] : null;
+            if (item != null)
+            {
+                ApartmentListForm dlg = new ApartmentListForm();
+                dlg.FloorId = (int)item.Tag;
+                dlg.ShowDialog();
+
+            }
         }
     }
 }

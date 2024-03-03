@@ -115,6 +115,7 @@
             lvFloors.TabIndex = 3;
             lvFloors.UseCompatibleStateImageBehavior = false;
             lvFloors.View = View.List;
+            lvFloors.MouseDoubleClick += lvFloors_MouseDoubleClick;
             // 
             // btnAddFloor
             // 
