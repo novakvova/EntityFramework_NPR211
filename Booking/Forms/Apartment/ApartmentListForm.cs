@@ -18,5 +18,15 @@ namespace Booking.Forms.Apartment
         {
             InitializeComponent();
         }
+
+        private void btnCraeteApartment_Click(object sender, EventArgs e)
+        {
+            ApartmentCreateForm apartmentCreateForm = new ApartmentCreateForm();
+            apartmentCreateForm.FloorId = FloorId;
+            if (apartmentCreateForm.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }

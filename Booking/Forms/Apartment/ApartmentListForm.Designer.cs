@@ -28,13 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnCraeteApartment = new Button();
             SuspendLayout();
+            // 
+            // btnCraeteApartment
+            // 
+            btnCraeteApartment.Location = new Point(33, 39);
+            btnCraeteApartment.Name = "btnCraeteApartment";
+            btnCraeteApartment.Size = new Size(112, 46);
+            btnCraeteApartment.TabIndex = 11;
+            btnCraeteApartment.Text = "Створити";
+            btnCraeteApartment.UseVisualStyleBackColor = true;
+            btnCraeteApartment.Click += btnCraeteApartment_Click;
             // 
             // ApartmentListForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1038, 538);
+            Controls.Add(btnCraeteApartment);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "ApartmentListForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Номери на поверсі";
@@ -42,5 +56,7 @@
         }
 
         #endregion
+
+        private Button btnCraeteApartment;
     }
 }
