@@ -31,5 +31,7 @@ namespace Domain.Entities
         public int FloorId { get; set; }
 
         public virtual FloorEntity Floor { get; set; }
+
+        public ICollection<ApartmentImageEntity> ApartmentImages { get; set; }
     }
 }
