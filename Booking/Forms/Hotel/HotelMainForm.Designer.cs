@@ -108,7 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(879, 482);
+            ClientSize = new Size(1250, 529);
             Controls.Add(dgvHotels);
             Controls.Add(label1);
             Controls.Add(btnCreateHotel);

@@ -15,5 +15,7 @@ namespace Domain.Entities
         public string Description { get; set; }
         [Required, StringLength(500)]
         public string Address { get; set; }
+
+        public virtual ICollection<FloorEntity> Floors { get; set; }
     }
 }
