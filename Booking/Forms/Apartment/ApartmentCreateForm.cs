@@ -19,14 +19,6 @@ namespace Booking.Forms.Apartment
 
         private List<string> ProductImages { get; set; }
 
-        private class ListViewIndexComparer : System.Collections.IComparer
-        {
-            public int Compare(object x, object y)
-            {
-                return ((ListViewItem)x).Index - ((ListViewItem)y).Index;
-            }
-        }
-
         public ApartmentCreateForm()
         {
             InitializeComponent();

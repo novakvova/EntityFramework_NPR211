@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             btnCraeteApartment = new Button();
+            lvImages = new ListView();
             SuspendLayout();
             // 
             // btnCraeteApartment
@@ -41,22 +42,33 @@
             btnCraeteApartment.UseVisualStyleBackColor = true;
             btnCraeteApartment.Click += btnCraeteApartment_Click;
             // 
+            // lvImages
+            // 
+            lvImages.Location = new Point(33, 112);
+            lvImages.Name = "lvImages";
+            lvImages.Size = new Size(968, 395);
+            lvImages.TabIndex = 44;
+            lvImages.UseCompatibleStateImageBehavior = false;
+            // 
             // ApartmentListForm
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1038, 538);
+            Controls.Add(lvImages);
             Controls.Add(btnCraeteApartment);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ApartmentListForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Номери на поверсі";
+            Load += ApartmentListForm_Load;
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button btnCraeteApartment;
+        private ListView lvImages;
     }
 }
