@@ -12,6 +12,7 @@ namespace Infrastructure.Data
     {
         public DbSet<HotelEntity> Hotels { get; set; }
         public DbSet<FloorEntity> Floors { get; set; }
+        public DbSet<ApartmentEntity> Apartments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
