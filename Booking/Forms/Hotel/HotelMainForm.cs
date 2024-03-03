@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Booking.Forms.Floor;
+using Domain.Entities;
 using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,18 @@ namespace Booking.Forms.Hotel
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                lvFloors.Items.Clear();
+                
                 int hotelId = (int)dgvHotels.Rows[e.RowIndex].Cells[0].Value;
-                var floors = getFloors(hotelId);
+                loadFloors(hotelId);
+            }
+        }
+
+        private void loadFloors(int hotelId)
+        {
+            lvFloors.Items.Clear();
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                var floors = context.Floors.Where(x => x.HotelId == hotelId).ToList();
                 foreach (var floor in floors)
                 {
                     ListViewItem lvFloorsItem = new ListViewItem();
@@ -64,13 +74,22 @@ namespace Booking.Forms.Hotel
             }
         }
 
-        private List<FloorEntity> getFloors(int hotelId)
+        private void btnAddFloor_Click(object sender, EventArgs e)
         {
-            using (ApplicationDbContext context = new ApplicationDbContext())
+            int rowIndex = dgvHotels.CurrentCell.RowIndex;
+            if(rowIndex>=0)
             {
-                var list = context.Floors.Where(x=>x.HotelId== hotelId).ToList();
-                return list;
+                int hotelId = (int)dgvHotels.Rows[rowIndex].Cells[0].Value;
+                string hotelName = (string)dgvHotels.Rows[rowIndex].Cells[1].Value;
+                FloorCreateForm dlg = new FloorCreateForm();
+                dlg.HotelId = hotelId;
+                dlg.HotelName = hotelName;
+                if(dlg.ShowDialog()==DialogResult.OK) {
+                    loadFloors(hotelId);
+                }
             }
+            
+
         }
     }
 }

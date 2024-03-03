@@ -114,6 +114,7 @@
             lvFloors.Size = new Size(317, 303);
             lvFloors.TabIndex = 3;
             lvFloors.UseCompatibleStateImageBehavior = false;
+            lvFloors.View = View.List;
             // 
             // btnAddFloor
             // 
@@ -123,6 +124,7 @@
             btnAddFloor.TabIndex = 4;
             btnAddFloor.Text = "Додати повер";
             btnAddFloor.UseVisualStyleBackColor = true;
+            btnAddFloor.Click += btnAddFloor_Click;
             // 
             // HotelMainForm
             // 
