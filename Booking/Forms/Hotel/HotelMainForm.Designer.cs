@@ -35,6 +35,8 @@
             ColName = new DataGridViewTextBoxColumn();
             ColAddress = new DataGridViewTextBoxColumn();
             ColDescription = new DataGridViewTextBoxColumn();
+            lvFloors = new ListView();
+            btnAddFloor = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvHotels).BeginInit();
             SuspendLayout();
             // 
@@ -71,6 +73,7 @@
             dgvHotels.RowHeadersWidth = 51;
             dgvHotels.Size = new Size(855, 305);
             dgvHotels.TabIndex = 2;
+            dgvHotels.CellEnter += dgvHotels_CellEnter;
             // 
             // ColId
             // 
@@ -104,11 +107,30 @@
             ColDescription.Name = "ColDescription";
             ColDescription.ReadOnly = true;
             // 
+            // lvFloors
+            // 
+            lvFloors.Location = new Point(905, 165);
+            lvFloors.Name = "lvFloors";
+            lvFloors.Size = new Size(317, 303);
+            lvFloors.TabIndex = 3;
+            lvFloors.UseCompatibleStateImageBehavior = false;
+            // 
+            // btnAddFloor
+            // 
+            btnAddFloor.Location = new Point(1061, 102);
+            btnAddFloor.Name = "btnAddFloor";
+            btnAddFloor.Size = new Size(161, 46);
+            btnAddFloor.TabIndex = 4;
+            btnAddFloor.Text = "Додати повер";
+            btnAddFloor.UseVisualStyleBackColor = true;
+            // 
             // HotelMainForm
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1250, 529);
+            Controls.Add(btnAddFloor);
+            Controls.Add(lvFloors);
             Controls.Add(dgvHotels);
             Controls.Add(label1);
             Controls.Add(btnCreateHotel);
@@ -131,5 +153,7 @@
         private DataGridViewTextBoxColumn ColName;
         private DataGridViewTextBoxColumn ColAddress;
         private DataGridViewTextBoxColumn ColDescription;
+        private ListView lvFloors;
+        private Button btnAddFloor;
     }
 }

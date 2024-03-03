@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data;
+﻿using Domain.Entities;
+using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,32 @@ namespace Booking.Forms.Hotel
                     object[] row = { hotel.Id, hotel.Name, hotel.Address, hotel.Description };
                     dgvHotels.Rows.Add(row);
                 }
+            }
+        }
+
+        private void dgvHotels_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                lvFloors.Items.Clear();
+                int hotelId = (int)dgvHotels.Rows[e.RowIndex].Cells[0].Value;
+                var floors = getFloors(hotelId);
+                foreach (var floor in floors)
+                {
+                    ListViewItem lvFloorsItem = new ListViewItem();
+                    lvFloorsItem.Text = floor.Name;
+                    lvFloorsItem.Tag = floor.Id;
+                    lvFloors.Items.Add(lvFloorsItem);
+                }
+            }
+        }
+
+        private List<FloorEntity> getFloors(int hotelId)
+        {
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                var list = context.Floors.Where(x=>x.HotelId== hotelId).ToList();
+                return list;
             }
         }
     }
