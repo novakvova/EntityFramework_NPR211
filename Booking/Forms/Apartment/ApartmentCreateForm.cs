@@ -1,4 +1,6 @@
-﻿using Helpers;
+﻿using Domain.Entities;
+using Helpers;
+using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -143,6 +145,38 @@ namespace Booking.Forms.Apartment
 
                 }
             }
+        }
+
+        private void btnCraete_Click(object sender, EventArgs e)
+        {
+            ApartmentEntity apartment = new ApartmentEntity();
+            apartment.Number = txtNumber.Text;
+            apartment.NumberOfRooms = Convert.ToInt32(txtNumberOfRooms.Text);
+            apartment.NumberOfBeds = Convert.ToInt32(txtNumberOfBeds.Text);
+            apartment.PricePerNight = Convert.ToDecimal(txtPricePerNight.Text);
+            apartment.FloorId = FloorId;
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Apartments.Add(apartment);
+                context.SaveChanges();
+
+                short p = 1;
+                foreach(ListViewItem item in lvImages.Items)
+                {
+                    string path = (string)item.Tag;
+                    var imageName = ImageWorker.ImageSaveFile(path, "apartments");
+                    var image = new ApartmentImageEntity
+                    {
+                        ApartmentId = apartment.Id,
+                        Name = imageName,
+                        Priority = p,
+                    };
+                    context.ApartmentImages.Add(image);
+                    context.SaveChanges();
+                    p++;
+                }
+            }
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

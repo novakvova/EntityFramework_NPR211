@@ -34,10 +34,10 @@
             label2 = new Label();
             txtNumber = new TextBox();
             label1 = new Label();
-            textNumberOfBeds = new TextBox();
+            txtNumberOfBeds = new TextBox();
             label4 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            txtPricePerNight = new TextBox();
             lvImages = new ListView();
             btnSelectImages = new Button();
             SuspendLayout();
@@ -60,6 +60,7 @@
             btnCraete.TabIndex = 10;
             btnCraete.Text = "Створити";
             btnCraete.UseVisualStyleBackColor = true;
+            btnCraete.Click += btnCraete_Click;
             // 
             // txtNumberOfRooms
             // 
@@ -98,13 +99,13 @@
             label1.TabIndex = 5;
             label1.Text = "Номер кімнати";
             // 
-            // textNumberOfBeds
+            // txtNumberOfBeds
             // 
-            textNumberOfBeds.Location = new Point(260, 124);
-            textNumberOfBeds.Name = "textNumberOfBeds";
-            textNumberOfBeds.Size = new Size(197, 27);
-            textNumberOfBeds.TabIndex = 12;
-            textNumberOfBeds.Text = "1";
+            txtNumberOfBeds.Location = new Point(260, 124);
+            txtNumberOfBeds.Name = "txtNumberOfBeds";
+            txtNumberOfBeds.Size = new Size(197, 27);
+            txtNumberOfBeds.TabIndex = 12;
+            txtNumberOfBeds.Text = "1";
             // 
             // label4
             // 
@@ -128,13 +129,13 @@
             label3.TabIndex = 4;
             label3.Text = "Ціна за добу";
             // 
-            // textBox1
+            // txtPricePerNight
             // 
-            textBox1.Location = new Point(502, 48);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(251, 27);
-            textBox1.TabIndex = 7;
-            textBox1.Text = "400";
+            txtPricePerNight.Location = new Point(502, 48);
+            txtPricePerNight.Name = "txtPricePerNight";
+            txtPricePerNight.Size = new Size(251, 27);
+            txtPricePerNight.TabIndex = 7;
+            txtPricePerNight.Text = "400";
             // 
             // lvImages
             // 
@@ -166,11 +167,11 @@
             ClientSize = new Size(934, 562);
             Controls.Add(btnSelectImages);
             Controls.Add(lvImages);
-            Controls.Add(textNumberOfBeds);
+            Controls.Add(txtNumberOfBeds);
             Controls.Add(label4);
             Controls.Add(btnCancel);
             Controls.Add(btnCraete);
-            Controls.Add(textBox1);
+            Controls.Add(txtPricePerNight);
             Controls.Add(label3);
             Controls.Add(txtNumberOfRooms);
             Controls.Add(label2);
@@ -191,10 +192,10 @@
         private Label label2;
         private TextBox txtNumber;
         private Label label1;
-        private TextBox textNumberOfBeds;
+        private TextBox txtNumberOfBeds;
         private Label label4;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox txtPricePerNight;
         private ListView lvImages;
         private Button btnSelectImages;
     }
