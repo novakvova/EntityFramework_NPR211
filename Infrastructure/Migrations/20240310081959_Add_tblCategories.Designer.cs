@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240310073641_Add_tblCategories")]
+    [Migration("20240310081959_Add_tblCategories")]
     partial class Add_tblCategories
     {
         /// <inheritdoc />
@@ -94,6 +94,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ParentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<short>("Priority")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

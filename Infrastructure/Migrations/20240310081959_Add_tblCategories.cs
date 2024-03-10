@@ -19,6 +19,7 @@ namespace Infrastructure.Migrations
                     Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     Image = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     Description = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: true),
+                    Priority = table.Column<short>(type: "INTEGER", nullable: false),
                     ParentId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
