@@ -14,6 +14,7 @@ namespace Infrastructure.Data
         public DbSet<FloorEntity> Floors { get; set; }
         public DbSet<ApartmentEntity> Apartments { get; set; }
         public DbSet<ApartmentImageEntity> ApartmentImages { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
