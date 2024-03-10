@@ -1,3 +1,4 @@
+using Booking.Forms.Category;
 using Booking.Forms.Hotel;
 using Domain.Entities;
 using Helpers;
@@ -27,7 +28,7 @@ namespace Booking
         {
             using (ApplicationDbContext applicationDbContext = new ApplicationDbContext())
             {
-                if(applicationDbContext.Categories.Count()==0)
+                if (applicationDbContext.Categories.Count() == 0)
                 {
                     CategoryEntity tepla_pidloga = new CategoryEntity();
                     tepla_pidloga.Name = "Тепла підлога";
@@ -50,7 +51,7 @@ namespace Booking
 
                     CategoryEntity konvektory = new CategoryEntity();
                     konvektory.ParentId = opalennya.Id;
-                    konvektory.Image = ImageWorker.ImageSaveUrl("https://comfortheat.kiev.ua/image/cache/catalog/airelec/airelec-375x375.jpg","categories");
+                    konvektory.Image = ImageWorker.ImageSaveUrl("https://comfortheat.kiev.ua/image/cache/catalog/airelec/airelec-375x375.jpg", "categories");
                     konvektory.Name = "Конвектори Airelec";
                     konvektory.Priority = 1;
                     konvektory.Description = "Електричні конвектори компанії Airelec (Франція) - " +
@@ -83,6 +84,12 @@ namespace Booking
 
                 }
             }
+        }
+
+        private void mHead_Opertaion_Category_Click(object sender, EventArgs e)
+        {
+            CategoryListForm dlg = new CategoryListForm();
+            dlg.ShowDialog();
         }
     }
 }

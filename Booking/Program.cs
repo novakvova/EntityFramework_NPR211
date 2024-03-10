@@ -1,3 +1,4 @@
+using Helpers;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ namespace Booking
             {
                 applicationDbContext.Database.Migrate();
             }
+            //ImageWorker.ImageSaveUrl("https://montevista.greatheartsamerica.org/wp-content/uploads/sites/2/2016/11/default-placeholder.png", "default");
             Application.Run(new MainForm());
         }
     }

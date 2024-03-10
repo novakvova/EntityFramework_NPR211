@@ -32,6 +32,8 @@
             mHead = new MenuStrip();
             mHead_File = new ToolStripMenuItem();
             mHead_File_Exit = new ToolStripMenuItem();
+            mHead_Operation = new ToolStripMenuItem();
+            mHead_Opertaion_Category = new ToolStripMenuItem();
             mHead_Options = new ToolStripMenuItem();
             mHead_Options_Seed = new ToolStripMenuItem();
             mHead.SuspendLayout();
@@ -50,10 +52,10 @@
             // mHead
             // 
             mHead.ImageScalingSize = new Size(20, 20);
-            mHead.Items.AddRange(new ToolStripItem[] { mHead_File, mHead_Options });
+            mHead.Items.AddRange(new ToolStripItem[] { mHead_File, mHead_Operation, mHead_Options });
             mHead.Location = new Point(0, 0);
             mHead.Name = "mHead";
-            mHead.Size = new Size(803, 28);
+            mHead.Size = new Size(1058, 28);
             mHead.TabIndex = 1;
             mHead.Text = "menuStrip1";
             // 
@@ -68,9 +70,23 @@
             // 
             mHead_File_Exit.Name = "mHead_File_Exit";
             mHead_File_Exit.ShortcutKeys = Keys.Alt | Keys.X;
-            mHead_File_Exit.Size = new Size(224, 26);
+            mHead_File_Exit.Size = new Size(176, 26);
             mHead_File_Exit.Text = "Вихід";
             mHead_File_Exit.Click += mHead_File_Exit_Click;
+            // 
+            // mHead_Operation
+            // 
+            mHead_Operation.DropDownItems.AddRange(new ToolStripItem[] { mHead_Opertaion_Category });
+            mHead_Operation.Name = "mHead_Operation";
+            mHead_Operation.Size = new Size(85, 24);
+            mHead_Operation.Text = "Операції";
+            // 
+            // mHead_Opertaion_Category
+            // 
+            mHead_Opertaion_Category.Name = "mHead_Opertaion_Category";
+            mHead_Opertaion_Category.Size = new Size(224, 26);
+            mHead_Opertaion_Category.Text = "Категорії";
+            mHead_Opertaion_Category.Click += mHead_Opertaion_Category_Click;
             // 
             // mHead_Options
             // 
@@ -82,7 +98,7 @@
             // mHead_Options_Seed
             // 
             mHead_Options_Seed.Name = "mHead_Options_Seed";
-            mHead_Options_Seed.Size = new Size(224, 26);
+            mHead_Options_Seed.Size = new Size(189, 26);
             mHead_Options_Seed.Text = "Заповнить БД";
             mHead_Options_Seed.Click += mHead_Options_Seed_Click;
             // 
@@ -90,7 +106,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(803, 464);
+            ClientSize = new Size(1058, 533);
             Controls.Add(btnHotel);
             Controls.Add(mHead);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -112,5 +128,7 @@
         private ToolStripMenuItem mHead_File_Exit;
         private ToolStripMenuItem mHead_Options;
         private ToolStripMenuItem mHead_Options_Seed;
+        private ToolStripMenuItem mHead_Operation;
+        private ToolStripMenuItem mHead_Opertaion_Category;
     }
 }
