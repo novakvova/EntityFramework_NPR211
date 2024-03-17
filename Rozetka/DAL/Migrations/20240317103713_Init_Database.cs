@@ -15,12 +15,12 @@ namespace DAL.Migrations
                 name: "tblCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    Image = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +31,11 @@ namespace DAL.Migrations
                 name: "tblOrderStatuses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,11 +46,11 @@ namespace DAL.Migrations
                 name: "tblRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,15 +61,15 @@ namespace DAL.Migrations
                 name: "tblSales",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SaleName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    ImagePath = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    SaleDescription = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: true),
-                    DecreasePercent = table.Column<int>(type: "INTEGER", nullable: false),
-                    ExpireTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SaleName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    SaleDescription = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    DecreasePercent = table.Column<int>(type: "int", nullable: false),
+                    ExpireTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,15 +80,15 @@ namespace DAL.Migrations
                 name: "tblUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 75, nullable: false),
-                    SecondName = table.Column<string>(type: "TEXT", maxLength: 75, nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    Password = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    SecondName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,14 +99,14 @@ namespace DAL.Migrations
                 name: "tblProducts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: true),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,12 +123,12 @@ namespace DAL.Migrations
                 name: "tblOrders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    OrderStatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderStatusId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,8 +151,8 @@ namespace DAL.Migrations
                 name: "tblUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RoleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,9 +175,9 @@ namespace DAL.Migrations
                 name: "tblBaskets",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Count = table.Column<short>(type: "INTEGER", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,13 +200,13 @@ namespace DAL.Migrations
                 name: "tblProductImages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    Priority = table.Column<short>(type: "INTEGER", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Priority = table.Column<short>(type: "smallint", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,8 +223,8 @@ namespace DAL.Migrations
                 name: "tblSales_ProductEnity",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SaleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    SaleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -247,14 +247,14 @@ namespace DAL.Migrations
                 name: "tblOrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    PriceBuy = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Count = table.Column<short>(type: "INTEGER", nullable: false),
-                    OrderId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsDelete = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PriceBuy = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Count = table.Column<short>(type: "smallint", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
