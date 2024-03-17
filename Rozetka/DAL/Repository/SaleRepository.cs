@@ -16,18 +16,19 @@ namespace DAL.Repository
 
         public IEnumerable<SaleEntity> GetAllSales()
         {
-            return GetAll().Include(x => x.Sales_Products)
-                               .ThenInclude(x => x.Product)
-                                   .ThenInclude(x => x.Images)
-                           .Include(x => x.Sales_Products)
-                               .ThenInclude(x => x.Product)
-                                   .ThenInclude(x => x.OrderItems)
-                           .Include(x => x.Sales_Products)
-                               .ThenInclude(x => x.Product)
-                                    .ThenInclude(x => x.Baskets)
-                           .Include(x => x.Sales_Products)
-                               .ThenInclude(x => x.Product)
-                                    .ThenInclude(x => x.Category)
+            return GetAll()
+                //.Include(x => x.Sales_Products)
+                           //    .ThenInclude(x => x.Product)
+                           //        .ThenInclude(x => x.Images)
+                           //.Include(x => x.Sales_Products)
+                           //    .ThenInclude(x => x.Product)
+                           //        .ThenInclude(x => x.OrderItems)
+                           //.Include(x => x.Sales_Products)
+                           //    .ThenInclude(x => x.Product)
+                           //         .ThenInclude(x => x.Baskets)
+                           //.Include(x => x.Sales_Products)
+                           //    .ThenInclude(x => x.Product)
+                           //         .ThenInclude(x => x.Category)
                            .ToList();
         }
 

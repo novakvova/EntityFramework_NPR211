@@ -18,6 +18,7 @@ namespace DAL.Data
         {
             using (EFAppContext dataContext = new EFAppContext())
             {
+                dataContext.Database.Migrate();
                 SeedCategories(dataContext);
                 SeedProducts(dataContext);
                 SeedImages(dataContext);
