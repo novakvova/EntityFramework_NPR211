@@ -1,0 +1,1391 @@
+﻿<UserControl x:Class="RozetkaUI.Components.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RozetkaUI.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920"
+             SizeChanged="UserControl_SizeChanged"
+             Loaded="navBar_Loaded"
+             Name="navBar">
+
+    <UserControl.Resources>
+        <Style x:Key="LoginButtonMenu" TargetType="Button">
+
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="10 -10 0 0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0 0 1 0"
+                                BorderBrush="{StaticResource PrimaryTextColor}"
+                                Padding="0 0 10 0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding IsLogined}" Value="true">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <Style x:Key="RegistartionButtonMenu" TargetType="Button">
+
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="Margin" Value="10 -10 0 0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding IsLogined}" Value="true">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <Style x:Key="CommonText" TargetType="TextBlock">
+
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="{StaticResource SecundaryTextColor}"/>
+
+
+        </Style>
+        <Style x:Key="MenuItem" TargetType="Button">
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10 4"/>
+            <Setter Property="Margin" Value="10 6"/>
+            <Setter Property="Width" Value="320"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="5"
+                                CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#d0ecdb"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d0ecdb"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        <Style x:Key="CategoriesMenuItem" TargetType="Button">
+
+            <EventSetter Event="Button.Click" Handler="moveToCategory"></EventSetter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10 4"/>
+            <Setter Property="Margin" Value="10 6"/>
+            <Setter Property="Width" Value="320"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="5"
+                                CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#d0ecdb"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d0ecdb"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        <Style x:Key="EditCategoryButtonStyle" TargetType="Button">
+            <EventSetter Event="Button.Click" Handler="EditCategory"></EventSetter>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="7" 
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DeleteCategoryButtonStyle" TargetType="Button">
+            <EventSetter Event="Button.Click" Handler="DeleteCategory"></EventSetter>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="7" 
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LinkButton"
+           BasedOn="{StaticResource ResourceKey={x:Type Button}}"
+           TargetType="Button">
+
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="FontSize" Value="20"/>
+
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter VerticalAlignment="Center"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" >
+                            <ContentPresenter.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="TextDecorations" Value="None" />
+                                    <Setter Property="Cursor" Value="{x:Null}"/>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter VerticalAlignment="Center"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" >
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <local:IfAdminConverter x:Key="IfAdminConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource PrimaryBackgroundColor}">
+            <Grid MaxWidth="1600" Margin="20 10"
+              VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Style="{StaticResource TransperentButtonStyle}"
+                VerticalAlignment="Top"
+                Margin="0 3 0 0"
+                Grid.Column="0"
+                Padding="7">
+                    <Path Data="{StaticResource Menu}"
+                  Stretch="Uniform"
+                  Width="20" Height="20"
+                  Fill="{StaticResource PrimaryTextColor}"
+                  HorizontalAlignment="Center">
+                        <Path.LayoutTransform>
+                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                        </Path.LayoutTransform>
+                    </Path>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="main" BeginTime="00:00:00">
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                         Value="-350 0 0 0"/>
+                                            <SplineThicknessKeyFrame KeyTime="0:0:.3"
+                                         Value="0 0 0 0"/>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="Back" BeginTime="00:00:00">
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                     Value="0 0 5000 0"/>
+                                            <SplineThicknessKeyFrame KeyTime="0:0:.01"
+                                                                     Value="0 0 0 0"/>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button Style="{StaticResource MyButton}"
+                        Click="HomeClick"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Grid.Column="1"
+                               Source="/Images/Logo.png"
+                               Width="35" Height="35"
+                               VerticalAlignment="Top"
+                               Margin="10 2 0 0"/>
+                        <TextBlock Grid.Column="2"
+                                   Name="logoText"
+                                   Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                   FontSize="29"
+                                   FontWeight="ExtraBlack"
+                                   Text="ROZETKA"
+                                   Margin="3 0 0 0"/>
+                    </StackPanel>
+                </Button>
+
+                <!--<Image Grid.Column="1"
+               Source="/Images/Logo.png"
+               Width="35" Height="35"
+               VerticalAlignment="Top"
+               Margin="10 2 0 0"/>
+
+                <TextBlock Grid.Column="2"
+                   Name="logoText"
+                   Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                   FontSize="29"
+                   FontWeight="ExtraBlack"
+                   Text="ROZETKA"
+                   Margin="3 0 0 0"/>-->
+
+                <Button Style="{StaticResource CategiriesButtonStyle}"
+                VerticalAlignment="Top"
+                Margin="10 3 0 0"
+                Padding="7 7 7 7"
+                Grid.Column="3"
+                Name="categoriesButton">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="CategoryMenuMain" BeginTime="00:00:00">
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                         Value="20 -700 0 0"/>
+                                            <SplineThicknessKeyFrame KeyTime="0:0:.2"
+                                         Value="20 60 0 0"/>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="CategoryMenu" BeginTime="00:00:00">
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                     Value="0 0 0 5000"/>
+                                            <SplineThicknessKeyFrame KeyTime="0:0:.01"
+                                                                     Value="0 0 0 0"/>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="{StaticResource CatalogMenu}"
+                              Stretch="Uniform"
+                              Width="20" Height="20"
+                              Fill="{StaticResource PrimaryTextColor}"
+                              HorizontalAlignment="Center">
+                            <Path.LayoutTransform>
+                                <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                            </Path.LayoutTransform>
+                        </Path>
+                        <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                           Text="Каталог"
+                           FontWeight="Regular"
+                           FontSize="13"
+                           Margin="4 0 0 0"/>
+                    </StackPanel>
+                </Button>
+
+                <Path Data="{StaticResource Search}"
+              Grid.Column="4"
+              VerticalAlignment="Top"
+              Panel.ZIndex="1"
+              Stretch="Uniform"
+              Width="11" Height="11"
+              Fill="{StaticResource SecundaryTextColor}"
+              HorizontalAlignment="Left"
+              Margin="11 16 0 0">
+                    <Path.LayoutTransform>
+                        <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                    </Path.LayoutTransform>
+                </Path>
+                <TextBox Grid.Column="4"
+                         Background="{StaticResource SecundaryBackgroundColor}"
+                         VerticalAlignment="Center"
+                         Tag="Я шукаю..."
+                         HorizontalAlignment="Stretch"
+                         Padding="10 4 0 3"
+                         Height="40"
+                         Style="{StaticResource SearchTextBoxStyle}"
+                         FontSize="12"
+                         Margin="4 3 -2 2"/>
+
+                <Button Style="{StaticResource SearchButtonStyle}"
+                        Height="35"
+                        Grid.Column="5"
+                FontWeight="Regular"
+                FontSize="12"
+                Padding="10 1 10 1"
+                VerticalAlignment="Top"
+                Margin="0 3 0 0"
+                Content="Знайти"/>
+
+                <StackPanel Grid.Column="6">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsLogined}" Value="true">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button Style="{StaticResource TransperentButtonStyle}"
+                        Click="LoginClick"
+                        VerticalAlignment="Top"
+                        Margin="10 3 0 0"
+                        Grid.Column="6"
+                        Padding="7">
+                        <Path Data="{StaticResource Account}"
+                              Stretch="Uniform"
+                              Width="20" Height="20"
+                              Fill="{StaticResource PrimaryTextColor}"
+                              HorizontalAlignment="Center">
+                            <Path.LayoutTransform>
+                                <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                            </Path.LayoutTransform>
+                        </Path>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Column="6">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsLogined}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button Style="{StaticResource TransperentButtonStyle}"
+                        Click="OrdersClick"
+                VerticalAlignment="Top"
+                Margin="10 3 0 0"
+                Grid.Column="6"
+                Padding="7">
+                        <Path Data="{StaticResource Orders}"
+                  Stretch="Uniform"
+                  Width="20" Height="20"
+                  Fill="{StaticResource PrimaryTextColor}"
+                  HorizontalAlignment="Center">
+                            <Path.LayoutTransform>
+                                <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                            </Path.LayoutTransform>
+                        </Path>
+                    </Button>
+                </StackPanel>
+                
+                <Button Style="{StaticResource TransperentButtonStyle}"
+                VerticalAlignment="Top"
+                Margin="10 3 0 0"
+                Grid.Column="7"
+                        Click="BasketClick"
+                Padding="7">
+                    <Path Data="{StaticResource Cart}"
+                  Stretch="Uniform"
+                  Width="20" Height="20"
+                  Fill="{StaticResource PrimaryTextColor}"
+                  HorizontalAlignment="Center">
+                        <Path.LayoutTransform>
+                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                        </Path.LayoutTransform>
+                    </Path>
+                </Button>
+
+            </Grid>
+        </Grid>
+
+        <Grid Grid.RowSpan="2">
+            <Grid Background="Black"
+                  Opacity="0.3"
+                  Name="Back"
+                  Margin="0 0 5000 0"
+                  MouseDown="Back_MouseDown"/>
+            <ScrollViewer HorizontalAlignment="Left"
+                      Background="White"
+                      Name="main"
+                      Grid.RowSpan="2"
+                      Width="350"
+                      Margin="-350 0 0 0"
+                          Grid.Column="0"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <StackPanel Background="{StaticResource PrimaryBackgroundColor}">
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Margin="0 15 0 0"
+                                Background="{StaticResource PrimaryBackgroundColor}">
+                            <Button Style="{StaticResource MyButton}"
+                                    Click="HomeMenuClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Grid.Column="1"
+                                           Source="/Images/Logo.png"
+                                           Width="35" Height="35"
+                                           VerticalAlignment="Top"
+                                           Margin="10 2 0 0"/>
+                                    <TextBlock Grid.Column="2"
+                                               Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                               FontSize="29"
+                                               FontWeight="ExtraBlack"
+                                               Text="ROZETKA"
+                                               Margin="3 0 0 0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource TransperentButtonStyle}"
+                                VerticalAlignment="Top"
+                                Margin="110 3 0 0"
+                                Padding="13"
+                                Name="closeMenu">
+                            <Path Data="{StaticResource Close}"
+                                  Stretch="Uniform"
+                                  Width="10" Height="10"
+                                  Fill="{StaticResource PrimaryTextColor}"
+                                  HorizontalAlignment="Center">
+                                <Path.LayoutTransform>
+                                    <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                </Path.LayoutTransform>
+                            </Path>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="main" BeginTime="00:00:00">
+                                                    <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                             Value="0 0 0 0"/>
+                                                    <SplineThicknessKeyFrame KeyTime="0:0:.3"
+                                                                             Value="-350 0 0 0"/>
+                                                </ThicknessAnimationUsingKeyFrames>
+                                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="Back" BeginTime="00:00:00">
+                                                    <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                             Value="0 0 0 0"/>
+                                                    <SplineThicknessKeyFrame KeyTime="0:0:.3"
+                                                                             Value="0 0 0 0"/>
+                                                    <SplineThicknessKeyFrame KeyTime="0:0:.3"
+                                                                             Value="0 0 5000 0"/>
+                                                </ThicknessAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                Name="profile"
+                                Margin="10 24 0 10">
+                            <Border Width="45" Height="45"
+                                CornerRadius="30"
+                                Background="#FF393636">
+                                <Path Data="{StaticResource Account}"
+                                  Stretch="Uniform"
+                                  Margin="0 0 0 0"
+                                  Width="30" Height="30"
+                                  Fill="{StaticResource PrimaryTextColor}"
+                                  HorizontalAlignment="Center">
+                                    <Path.LayoutTransform>
+                                        <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                    </Path.LayoutTransform>
+                                </Path>
+                            </Border>
+                            <StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button Style="{StaticResource LoginButtonMenu}"
+                                        Content="Вхід"
+                                        Click="LoginClick"/>
+                                    <Button Style="{StaticResource RegistartionButtonMenu}"
+                                        Content="Реєстрація"
+                                        Click="RegistrationClick"/>
+
+                                    <Button Style="{StaticResource MyButton}"
+                                            Click="ToProfilePageClick">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                                       Text="{Binding LoginedUser.FirstName}"
+                                                       Margin="10 0 0 0"/>
+                                            <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                                       Text="{Binding LoginedUser.SecondName}"
+                                                       Margin="5 0 0 0"/>
+                                        </StackPanel>
+                                    </Button>
+
+
+                                </StackPanel>
+
+                                <TextBlock Text="Авторизуйтесь для отримання розширених можливостей"
+                                           Name="tipProfile"
+                                       Margin="10 0 0 0"
+                                       Width="200"
+                                       Style="{StaticResource CommonText}"/>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0 17 0 0">
+
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                Click="AdminPanelClick"
+                                x:Name="adminButton"
+                                Visibility="{Binding LoginedUser, Converter={StaticResource IfAdminConverter}}">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource AdminPanel}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#221f1f"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=adminButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Панель керування"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+                        
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                x:Name="catalogButton"
+                                Click="catalogButton_Click">
+                            
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource CatalogMenu}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#221f1f"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=catalogButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Каталог товарів"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Separator Background="Gray"/>
+
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                x:Name="questionButton"
+                                Click="QuestionClick">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource Question}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#221f1f"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=questionButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Довідковий центр"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                x:Name="chatButton"
+                                Click="ChatClick">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource Telegram}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#00a046"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=chatButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#00a046"
+                                           Text="Чат з ROZETKA"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Separator Background="Gray"/>
+
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                x:Name="ordersButton"
+                                Click="OrdersMenuClick"
+                                Visibility="{Binding IsLogined, Converter={StaticResource VisibleIfTrueConverter}}">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource Orders}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#221f1f"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=ordersButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Мої замовлення"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button HorizontalAlignment="Left"
+                                Style="{StaticResource MenuItem}"
+                                x:Name="basketButton"
+                                Click="BasketMenuClick">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+
+                                <Border Width="45" Height="45"
+                                        CornerRadius="30">
+                                    <Path Data="{StaticResource Cart}"
+                                      Stretch="Uniform"
+                                      Width="25" Height="25"
+                                      Fill="#221f1f"
+                                      HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.Background" Value="LightGray"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=basketButton, Path=IsMouseOver}" Value="true">
+                                                    <Setter Property="Border.Background" Value="#d0ecdb"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Кошик"
+                                           FontWeight="Regular"
+                                           FontSize="23"
+                                           Margin="4 0 0 0"/>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Separator Background="Gray"/>
+
+                        <TextBlock Text="Інформація про компанію"
+                                   Style="{StaticResource CommonText}"
+                                   Margin="10 7"
+                                   FontSize="18"/>
+                        <Button Content="Про нас"
+                                Click="AboutUs"
+                                Margin="10 18 0 0"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Умови використання додатку"
+                                Click="TermsClick"
+                                Margin="10 18 0 0"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Вакансії"
+                                Click="CareersClick"
+                                Margin="10 18 0 0"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Контакти"
+                                Click="ContactsClick"
+                                Margin="10 18 0 0"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Усі категорії"
+                                Click="HomeMenuClick"
+                                Margin="10 18 0 0"
+                                Style="{StaticResource LinkButton}"/>
+
+                        <Separator Background="Gray" Margin="0 10"/>
+
+                        <TextBlock Text="Завантажуйте наші мобільні додатки"
+                                   Style="{StaticResource CommonText}"
+                                   Margin="10 7"
+                                   FontSize="18"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10 0">
+                            <Button Style="{StaticResource MyButton}"
+                                    Click="DownloadFromGooglePlay">
+                                <Image Source="/Images/GooglePlay.png"
+                                   Width="140"/>
+                            </Button>
+                            <Button Style="{StaticResource MyButton}"
+                                    Click="DownloadFromAppStore">
+                                <Image Source="/Images/AppStore.png"
+                                   Width="165"
+                                   Margin="5 0 0 0"/>
+                            </Button>
+                        </StackPanel>
+
+                        <Separator Background="Gray" Margin="0 10"/>
+
+                        <TextBlock Text="Ми в соціальних мережах"
+                                   Style="{StaticResource CommonText}"
+                                   Margin="10 7"
+                                   FontSize="18"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10 0 0 10">
+
+                            <Button Style="{StaticResource IconButton}"
+                                    x:Name="facebookButton"
+                                    ToolTip="Facebook"
+                                    Click="FacebookClick">
+                                <Border CornerRadius="20"
+                                        Background="White">
+                                    <Path Data="{StaticResource Facebook}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill" Value="#6b78a8"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=facebookButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#506098"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+                            <Button Style="{StaticResource IconButton}"
+                                    Margin="5 0 0 0"
+                                    x:Name="twitterButton"
+                                    ToolTip="Twitter"
+                                    Click="TwitterClick">
+                                <Border CornerRadius="15"
+                                        Background="White">
+                                    <Path Data="{StaticResource Twitter}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill" Value="#8bd1fd"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=twitterButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#76c9fd"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+                            <Button Style="{StaticResource IconButton}"
+                                    Margin="5 0 0 0"
+                                    x:Name="youtubeButton"
+                                    ToolTip="Youtube"
+                                    Click="YoutubeClick">
+                                <Border CornerRadius="15"
+                                        Background="White">
+                                    <Path Data="{StaticResource Youtube}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill" Value="#ec2727"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=youtubeButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#e90000"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+                            <Button Style="{StaticResource IconButton}"
+                                    Margin="5 0 0 0"
+                                    x:Name="instagramButton"
+                                    ToolTip="Instagram"
+                                    Click="InstagramClick">
+                                <Border CornerRadius="15"
+                                        Background="White">
+                                    <Path Data="{StaticResource Instagram}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush>
+                                                            <GradientStop Offset="0.0" Color="#ffb827"/>
+                                                            <GradientStop Offset="0.5" Color="#ed6750"/>
+                                                            <GradientStop Offset="1.1" Color="#a22eae"/>
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=instagramButton}" Value="True">
+                                                        <Setter Property="Fill">
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush>
+                                                                    <GradientStop Offset="0.0" Color="#ff9500"/>
+                                                                    <GradientStop Offset="0.5" Color="#da355b"/>
+                                                                    <GradientStop Offset="1.1" Color="#980b9b"/>
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+                            <Button Style="{StaticResource IconButton}"
+                                    Margin="5 0 0 0"
+                                    x:Name="viberButton"
+                                    ToolTip="Viber"
+                                    Click="ViberClick">
+                                <Border CornerRadius="15"
+                                        Background="White">
+                                    <Path Data="{StaticResource Viber}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill" Value="#915bbb"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=viberButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#7d3daf"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+                            <Button Style="{StaticResource IconButton}"
+                                    Margin="5 0 0 0"
+                                    x:Name="telegramButton"
+                                    ToolTip="Telegram"
+                                    Click="TelegramClick">
+                                <Border CornerRadius="15"
+                                        Background="White">
+                                    <Path Data="{StaticResource TelegramCircle}"
+                                          Height="35" Width="35"
+                                          Stretch="Uniform">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Fill" Value="#279ad4"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=telegramButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#0088cc"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+                            </Button>
+
+                        </StackPanel>
+
+                        <StackPanel Visibility="{Binding IsLogined, Converter={StaticResource VisibleIfTrueConverter}}">
+                            <Separator Background="Gray" Margin="0 10 0 0"/>
+
+                            <Button HorizontalAlignment="Left"
+                                    Style="{StaticResource MenuItem}"
+                                    x:Name="exitButton"
+                                    Click="LogoutClick">
+                                <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+                                    <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                           VerticalAlignment="Center"
+                                           Foreground="#221f1f"
+                                           Text="Вийти з аккаунта"
+                                           FontWeight="Regular"
+                                           FontSize="20"
+                                           Padding="7"
+                                           Margin="4 0 0 0"/>
+                                </StackPanel>
+
+                            </Button>
+
+                        </StackPanel>
+                    </StackPanel>
+
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.RowSpan="2">
+            <Button IsEnabled="False"
+                    Opacity="0"
+                    Margin="0 0 0 5000"
+                    Name="closeCategories">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="CategoryMenuMain" BeginTime="00:00:00">
+                                        <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                             Value="20 60 0 0"/>
+                                        <SplineThicknessKeyFrame KeyTime="0:0:.2"
+                                                                             Value="20 -700 0 0"/>
+                                    </ThicknessAnimationUsingKeyFrames>
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="CategoryMenu" BeginTime="00:00:00">
+                                        <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                             Value="0 0 0 0"/>
+                                        <SplineThicknessKeyFrame KeyTime="0:0:.2"
+                                                                             Value="0 0 0 0"/>
+                                        <SplineThicknessKeyFrame KeyTime="0:0:.2"
+                                                                             Value="0 0 0 5000"/>
+                                    </ThicknessAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Grid Background="Black"
+                  Opacity="0.3"
+                  Name="CategoryMenu"
+                  MouseDown="CategoryMenu_MouseDown"
+                  Margin="0 0 0 5000"/>
+
+            <ScrollViewer Grid.Row="1" 
+                          HorizontalAlignment="Left"
+                          Name="CategoryMenuMain"
+                          Grid.RowSpan="2"
+                          MaxHeight="500"
+                          VerticalAlignment="Top"
+                          Margin="20 -700 0 0"
+                          Grid.Column="0"
+                          Background="White">
+                <StackPanel>
+                    <Button Style="{StaticResource MenuItem}"
+                        Margin="5 5 5 3"
+                        HorizontalContentAlignment="Center"
+                        Click="moveToAllCategories">
+
+                        <Grid Width="320">
+                            <TextBlock Text="Всі категорії"
+                                   Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="0 0 5 0"/>
+                            <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 0 10 0">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LoginedUser.UserRoles[0].Role.Name}" Value="Admin">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Button HorizontalAlignment="Right" 
+                                    Click="AddCategory"
+                                    Style="{StaticResource TransperentButtonStyle}"
+                                    VerticalAlignment="Top"
+                                    Padding="7"
+                                    ToolTip="Добавити категорію">
+                                    <Path Data="{StaticResource Plus}"
+                                                  Stretch="Uniform"
+                                                  Width="20" Height="20"
+                                                  Fill="{StaticResource PrimaryBackgroundColor}"
+                                                  HorizontalAlignment="Center">
+                                        <Path.LayoutTransform>
+                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </Button>
+                    <ItemsControl Name="categoriesItemControl">
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="ItemTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource MenuItem}"
+                                                    Margin="5 5 5 3"
+                                                    HorizontalContentAlignment="Center"
+                                                    Click="moveToCategory">
+                                                <Grid Width="320">
+                                                    <TextBlock Text="{Binding Name}"
+                                                               Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Left"
+                                                               Margin="0 0 5 0"/>
+
+                                                </Grid>
+                                            </Button>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding LoginedUser.UserRoles[0].Role.Name}" Value="Admin">
+                                        <Setter Property="ItemTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <Button Style="{StaticResource CategoriesMenuItem}"
+                                                            Margin="5 5 5 3"
+                                                            HorizontalContentAlignment="Center">
+
+                                                        <Grid Width="320">
+                                                            <TextBlock Text="{Binding Name}"
+                                                                       Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                                       VerticalAlignment="Center"
+                                                                       HorizontalAlignment="Left"
+                                                                       Margin="0 0 5 0"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right"
+                                                                        Margin="0 0 10 0">
+
+                                                                <Button HorizontalAlignment="Right"
+                                                                        Style="{StaticResource EditCategoryButtonStyle}"
+                                                                        VerticalAlignment="Top"
+                                                                        Padding="7">
+                                                                    <Path Data="{StaticResource Edit}"
+                                                                          Stretch="Uniform"
+                                                                          Width="20" Height="20"
+                                                                          Fill="{StaticResource PrimaryBackgroundColor}"
+                                                                          HorizontalAlignment="Center">
+                                                                        <Path.LayoutTransform>
+                                                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                                                        </Path.LayoutTransform>
+                                                                    </Path>
+                                                                </Button>
+                                                                <Button HorizontalAlignment="Right"
+                                                                        Style="{StaticResource DeleteCategoryButtonStyle}"
+                                                                        VerticalAlignment="Top"
+                                                                        Padding="7">
+                                                                    <Path Data="{StaticResource Delete}"
+                                                                          Stretch="Uniform"
+                                                                          Width="20" Height="20"
+                                                                          Fill="{StaticResource PrimaryBackgroundColor}"
+                                                                          HorizontalAlignment="Center">
+                                                                        <Path.LayoutTransform>
+                                                                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                                                        </Path.LayoutTransform>
+                                                                    </Path>
+                                                                </Button>
+                                                            </StackPanel>
+
+
+                                                        </Grid>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="4" Background="White" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                    </ItemsControl>
+
+                </StackPanel>
+            </ScrollViewer>
+            
+        </Grid>
+
+    </Grid>
+</UserControl>

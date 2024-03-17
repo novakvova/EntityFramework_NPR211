@@ -1,0 +1,624 @@
+﻿<Page x:Class="RozetkaUI.Pages.AdminPanelPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RozetkaUI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="660"
+      Title="AdminPanelPage"
+      Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Background" Value="Transparent" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+
+                        <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="LightGray" Margin="2">
+                            <ContentPresenter ContentSource="Header" Margin="2" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="PART_Border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TabControl}">
+            <Setter Property="TabStripPlacement" Value="Left" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="2"    />
+            <Setter Property="Background" Value="White" />
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Name="ColumnDefinition0" />
+                                <ColumnDefinition Width="0" Name="ColumnDefinition1" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" Name="RowDefinition0" />
+                                <RowDefinition Height="*" Name="RowDefinition1" />
+                            </Grid.RowDefinitions>
+
+                            <Border x:Name="HeaderBorder" 
+                            BorderBrush="Black" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Background="#FAFAFA"
+                            Margin="0,0,0,5">
+                                <TabPanel IsItemsHost="True"
+                                  Name="HeaderPanel" 
+                                  Panel.ZIndex="1" 
+                                  KeyboardNavigation.TabIndex="1"
+                                  Grid.Column="0" 
+                                  Grid.Row="0" 
+                         />
+                            </Border>
+
+                            <Grid Name="ContentPanel" 
+                          KeyboardNavigation.TabIndex="2" 
+                          KeyboardNavigation.TabNavigation="Local" 
+                          KeyboardNavigation.DirectionalNavigation="Contained" 
+                          Grid.Column="0" 
+                          Grid.Row="1">
+                                <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                                    <ContentPresenter Content="{TemplateBinding SelectedContent}" 
+                                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" 
+                                              ContentStringFormat="{TemplateBinding SelectedContentStringFormat}" 
+                                              ContentSource="SelectedContent" 
+                                              Name="PART_SelectedContentHost" 
+                                              Margin="2" 
+                                              SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
+                            />
+                                </Border>
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="TabControl.TabStripPlacement" Value="Bottom">
+                                <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="1" />
+                                <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="Auto" />
+                                <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="0,5,0,0" />
+                            </Trigger>
+                            <Trigger Property="TabControl.TabStripPlacement" Value="Left">
+                                <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="ContentPanel" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="Auto" />
+                                <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="*" />
+                                <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+                                <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="0,0,5,0" />
+                            </Trigger>
+                            <Trigger Property="TabControl.TabStripPlacement" Value="Right">
+                                <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="ContentPanel" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="*" />
+                                <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="Auto" />
+                                <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+                                <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="5,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LinkButton"
+           BasedOn="{StaticResource ResourceKey={x:Type Button}}"
+           TargetType="Button">
+
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="FontSize" Value="18"/>
+
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter VerticalAlignment="Center"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" >
+                            <ContentPresenter.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="TextDecorations" Value="None" />
+                                    <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                    <Setter Property="Foreground" Value="#3e77aa" />
+                                    <Setter Property="Cursor" Value="{x:Null}"/>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter VerticalAlignment="Center"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" >
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            <Setter Property="Foreground" Value="#f84170" />
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TransperentBTN" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="#3e77aa" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#ff7878" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="OrderButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="Background" Value="{StaticResource ThirdBackgroundColor}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <local:SumPriceConverter x:Key="PriceConverter"/>
+        <local:UserNameConverter x:Key="UserNameConverter"/>
+
+    </Page.Resources>
+    
+    <Grid>
+        <TabControl Margin="10" BorderBrush="Gainsboro">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Користувачі">
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Users}"
+                          IsReadOnly="True" AutoGenerateColumns="False"
+                              Name="userPanel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Зареєстрований"
+                                        Width="*"
+                                        Binding="{Binding DateCreated}"/>
+                            <DataGridTextColumn Header="Email"
+                                        Width="*"
+                                        Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Моб. телефон"
+                                        Width="*"
+                                        Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Ім'я"
+                                        Width="*"
+                                        Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Прізвище"
+                                        Width="*"
+                                        Binding="{Binding SecondName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid ItemsSource="{Binding Users}"
+                          IsReadOnly="True" AutoGenerateColumns="False"
+                              Name="userSuperPanel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Зареєстрований"
+                                        Width="*"
+                                        Binding="{Binding DateCreated}"/>
+                            <DataGridTextColumn Header="Email"
+                                        Width="*"
+                                        Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Моб. телефон"
+                                        Width="*"
+                                        Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Ім'я"
+                                        Width="*"
+                                        Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Прізвище"
+                                        Width="*"
+                                        Binding="{Binding SecondName}"/>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource PrimaryButtonStyle}"
+                                            FontWeight="Regular"
+                                            FontSize="12"
+                                            Padding="10 5 10 5"
+                                            Margin="5"
+                                            VerticalAlignment="Top"
+                                            Content="Зробити адміном"
+                                            Click="MakeAdmin"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Адміністратори" >
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Admins}"
+                          IsReadOnly="True" AutoGenerateColumns="False"
+                          x:Name="adminPanel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Зареєстрований"
+                                        Width="*"
+                                        Binding="{Binding DateCreated}"/>
+                            <DataGridTextColumn Header="Email"
+                                        Width="*"
+                                        Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Моб. телефон"
+                                        Width="*"
+                                        Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Ім'я"
+                                        Width="*"
+                                        Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Прізвище"
+                                        Width="*"
+                                        Binding="{Binding SecondName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid ItemsSource="{Binding Admins}"
+                          IsReadOnly="True" AutoGenerateColumns="False"
+                          x:Name="superAdminPanel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Зареєстрований"
+                                        Width="*"
+                                        Binding="{Binding DateCreated}"/>
+                            <DataGridTextColumn Header="Email"
+                                        Width="*"
+                                        Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Моб. телефон"
+                                        Width="*"
+                                        Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Ім'я"
+                                        Width="*"
+                                        Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Прізвище"
+                                        Width="*"
+                                        Binding="{Binding SecondName}"/>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource PrimaryButtonStyle}"
+                                            FontWeight="Regular"
+                                            FontSize="12"
+                                            Padding="10 5 10 5"
+                                            Margin="5"
+                                            VerticalAlignment="Top"
+                                            Content="Видалити адміна"
+                                            Click="DeleteAdmin"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Замовлення" >
+                <Grid>
+                    
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Orders.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+                        <Image HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="../Images/OrdersImage.png"
+                               Width="300"/>
+                        <TextBlock Text="Список замовлень пустий"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                   Grid.Row="1"/>
+                        <TextBlock Text="Користувачі ще нічого не заказували"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                               Grid.Row="2"/>
+
+                    </Grid>
+
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Orders.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*" MinWidth="50"/>
+                            <ColumnDefinition Width="0.2*" MinWidth="100"/>
+                            <ColumnDefinition Width="0.25*" MinWidth="120"/>
+                            <ColumnDefinition Width="0.3*" MinWidth="150"/>
+                            <ColumnDefinition Width="0.2*" MinWidth="100"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Style="{StaticResource TransperentBTN}"
+                                HorizontalAlignment="Center"
+                                Content="#"
+                                Click="SortByNumber"/>
+                        <Button Style="{StaticResource TransperentBTN}"
+                                HorizontalAlignment="Center"
+                                Grid.Column="1"
+                                Content="Користувач"
+                                Click="SortByUser"/>
+                        <Button Style="{StaticResource TransperentBTN}"
+                                Grid.Column="2"
+                                Content="Ціна"
+                                Click="SortByPrice"/>
+                        <Button Style="{StaticResource TransperentBTN}"
+                                Grid.Column="3"
+                                Content="Кількість товарів"
+                                Click="SortByCountProducts"/>
+                        <Button Style="{StaticResource TransperentBTN}"
+                                Grid.Column="4"
+                                Content="Статус"
+                                Click="SortByStatus"/>
+
+                        <ItemsControl Grid.Row="1"
+                                      Grid.ColumnSpan="5"
+                                      ItemsSource="{Binding Orders}"
+                                      HorizontalAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource OrderButton}"
+                                            Click="OrderInfoClick">
+                                        <Border Padding="5"
+                                                BorderBrush="LightGray"
+                                                Margin="0 5 0 0"
+                                                CornerRadius="3">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.1*" MinWidth="50"/>
+                                                    <ColumnDefinition Width="0.2*" MinWidth="100"/>
+                                                    <ColumnDefinition Width="0.25*" MinWidth="120"/>
+                                                    <ColumnDefinition Width="0.3*" MinWidth="150"/>
+                                                    <ColumnDefinition Width="0.2*" MinWidth="100"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Text="{Binding Id}"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                                
+                                                <TextBlock Text="{Binding User,Converter={StaticResource UserNameConverter}}"
+                                                           Grid.Column="1"
+                                                           TextWrapping="WrapWithOverflow"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+
+                                                <TextBlock Text="{Binding OrderItems,Converter={StaticResource PriceConverter}}"
+                                                           Grid.Column="2"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+
+                                                <TextBlock Text="{Binding OrderItems.Count}"
+                                               Grid.Column="3"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                                <TextBlock Text="{Binding OrderStatus.Name}"
+                                               Grid.Column="4"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                            </Grid>
+                                        </Border>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Button Style="{StaticResource LinkButton}"
+                                Content="Загрузити ще..."
+                                Click="LoadMore"
+                                Margin="20 10 0 10"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                Grid.Row="2"/>
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="2"
+                                   Grid.ColumnSpan="3"
+                                   VerticalAlignment="Center"
+                                   Margin="10 0 0 0"
+                                   TextWrapping="WrapWithOverflow">
+                            Загальна сума товарів <Run Name="GeneralSum"/><LineBreak/>
+                            Загальна кількість товарів <Run Name="GeneralProducts"/>
+                        </TextBlock>
+
+                    </Grid>
+                    
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Акції">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button HorizontalAlignment="Left"
+                            Style="{StaticResource TransperentButtonStyle}"
+                            VerticalAlignment="Top"
+                            Margin="0 10 5 10"
+                            Padding="7"
+                            Click="AddSale">
+                        <Path Data="{StaticResource Plus}"
+                              Stretch="Uniform"
+                              Width="20" Height="20"
+                              Fill="{StaticResource PrimaryBackgroundColor}"
+                              HorizontalAlignment="Center">
+                            <Path.LayoutTransform>
+                                <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                            </Path.LayoutTransform>
+                        </Path>
+                    </Button>
+
+                    <DataGrid ItemsSource="{Binding Sales}"
+                              IsReadOnly="True" AutoGenerateColumns="False"
+                              Name="sales"
+                              Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="100" Height="100"
+                                               Source="{Binding ImagePath}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Назва"
+                                        Width="*"
+                                        Binding="{Binding SaleName}"/>
+                            <DataGridTextColumn Header="Процент знижки"
+                                        Width="*"
+                                        Binding="{Binding DecreasePercent}"/>
+                            <DataGridTextColumn Header="Дата завершення"
+                                        Width="*"
+                                        Binding="{Binding ExpireTime, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                            <DataGridTextColumn Header="Акційних товарів"
+                                        Width="*"
+                                        Binding="{Binding Sales_Products.Count}"/>
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource SecundaryButtonStyle}"
+                                                FontWeight="Regular"
+                                                FontSize="12"
+                                                Padding="10 5 10 5"
+                                                Margin="5"
+                                                VerticalAlignment="Top"
+                                                Content="Редагувати товари"
+                                                    Click="EditSaleProducts"/>
+                                            <Button Style="{StaticResource SecundaryButtonStyle}"
+                                                FontWeight="Regular"
+                                                FontSize="12"
+                                                Padding="10 5 10 5"
+                                                Margin="5"
+                                                VerticalAlignment="Top"
+                                                Content="Редагувати"
+                                                    Click="EditSale"/>
+                                            <Button Style="{StaticResource PrimaryButtonStyle}"
+                                                FontWeight="Regular"
+                                                FontSize="12"
+                                                Padding="10 5 10 5"
+                                                Margin="5"
+                                                VerticalAlignment="Top"
+                                                Content="Видалити"
+                                                    Click="DeleteSale"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

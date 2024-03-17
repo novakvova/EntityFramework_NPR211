@@ -1,0 +1,150 @@
+﻿<Page x:Class="RozetkaUI.Pages.AddOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RozetkaUI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="660"
+      Title="AddOrderPage"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Page.Resources>
+        <local:CountConverter x:Key="countConverter"/>
+        <local:SalePriceConverter x:Key="saleConverter"/>
+    </Page.Resources>
+
+    <StackPanel Background="White">
+        <TextBlock Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                   Margin="20 20 20 0"
+                   Foreground="Black">
+            Оформлення замовлення №<Run Text="{Binding OrderCount, Converter={StaticResource countConverter}}"/>
+        </TextBlock>
+
+        <Separator Margin="20 10 20 0"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="20 20 20 0">
+            <Border Width="20"
+                    Height="20"
+                    Background="LightGray"
+                    Padding="5"
+                    CornerRadius="20">
+                <TextBlock Text="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Товари"
+                       Margin="5 0 0 0"/>
+
+            <ToggleButton Style="{StaticResource PrimaryNoBorderButtonStyle}"
+                          Content="Редагувати"
+                          FontSize="12"
+                          HorizontalAlignment="Right"
+                          Padding="3 2"
+                          Margin="10 0 0 0"
+                          Click="MoveToBasket"/>
+
+            
+
+        </StackPanel>
+
+        <DataGrid IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  Margin="40 10 20 0"
+                  ItemsSource="{Binding User.Baskets}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="100"
+                                   Height="100"
+                                   Source="{Binding Product.Images[0].Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Назва"
+                                    Width="auto"
+                                    Binding="{Binding Product.Name}"/>
+                <DataGridTextColumn Header="Ціна"
+                                    Width="*"
+                                    Binding="{Binding Product, Converter={StaticResource saleConverter}}"/>
+                <DataGridTextColumn Header="Кількість"
+                                    Width="*"
+                                    Binding="{Binding Count}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="20 20 20 0">
+            <Border Width="20"
+                    Height="20"
+                    Background="LightGray"
+                    Padding="5"
+                    CornerRadius="20">
+                <TextBlock Text="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Доставка"
+                       Margin="5 0 0 0"/>
+        </StackPanel>
+
+        <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                 Margin="40 10 0 0"
+                 FontSize="12"
+                 Tag="Введіть адресу доставки"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="20 20 20 0">
+            <Border Width="20"
+                    Height="20"
+                    Background="LightGray"
+                    Padding="5"
+                    CornerRadius="20">
+                <TextBlock Text="3"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Оплата"
+                       Margin="5 0 0 0"/>
+        </StackPanel>
+
+        <StackPanel Margin="40 10 20 0">
+            <RadioButton Content="Оплата під час отримання товару" Margin="0 5 0 0" IsChecked="True"/>
+            <RadioButton Content="Оплати зараз" Margin="0 5 0 0"/>
+        </StackPanel>
+
+        <Border Margin="40 10 0 0"
+                Width="350"
+                HorizontalAlignment="Left"
+                Background="LightGray"
+                CornerRadius="7">
+            <StackPanel>
+                <TextBlock Text="Разом"
+                       Margin="10 10 0 0"
+                       FontSize="20"/>
+
+                <Separator Margin="10 10 10 10"/>
+
+                <TextBlock Margin="10 0 0 0"
+                           FontSize="16">
+                    До сплати <Run Text="{Binding Summury}"/> грн
+                </TextBlock>
+
+                <Separator Margin="10 15 10 10"/>
+
+                <ToggleButton Style="{StaticResource PrimaryNoBorderButtonStyle}"
+                              Content="Замовлення підтверджую"
+                              FontSize="15"
+                              Padding="6 5"
+                              Margin="10 0 0 10"
+                              Click="ApplyOrder"/>
+
+            </StackPanel>
+
+        </Border>
+        
+    </StackPanel>
+</Page>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="RozetkaUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RozetkaUI"
+        xmlns:components="clr-namespace:RozetkaUI.Components"
+        mc:Ignorable="d"
+        Title="Rozetka" 
+        Width="1000" Height="1000"
+        MinHeight="800" MinWidth="660"
+        Icon="Images/Logo.ico"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="235*"/>
+            <RowDefinition Height="152*"/>
+        </Grid.RowDefinitions>
+
+        <components:NavigationBar x:Name="navBar" Grid.RowSpan="3" Panel.ZIndex="1"/>
+
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
+            <Frame x:Name="pageFrame"
+                   NavigationUIVisibility="Hidden"/>
+        </ScrollViewer>
+
+        <Frame x:Name="modalFrame"
+               NavigationUIVisibility="Hidden"
+               Panel.ZIndex="10"
+               Grid.RowSpan="3"/>
+
+    </Grid>
+</Window>

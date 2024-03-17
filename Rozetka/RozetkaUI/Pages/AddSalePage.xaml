@@ -1,0 +1,217 @@
+﻿<Page x:Class="RozetkaUI.Pages.AddSalePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RozetkaUI.Pages"
+      mc:Ignorable="d" 
+      Title="AddSalePage"
+      Background="{StaticResource ThirdBackgroundColor}">
+
+    <Page.Resources>
+
+        <Style x:Key="PhotoCard" TargetType="Border">
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="Margin" Value="2 0 0 2"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="CornerRadius" Value="7"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <Style x:Key="CardButton" TargetType="Button">
+
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryButtonColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="{StaticResource PrimaryButtonHoverColor}"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+    </Page.Resources>
+
+    <Border HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="610"
+            Height="680"
+            CornerRadius="15"
+            Background="{StaticResource PrimaryBackgroundColor}">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel CanVerticallyScroll="True">
+
+                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                       HorizontalAlignment="Left"
+                       Margin="30 30 0 0"
+                       Text="Назва акції"/>
+
+                <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                         Background="{StaticResource SecundaryBackgroundColor}"
+                         Tag="Вводьте сюди"
+                         FontWeight="SemiBold"
+                         Width="550"
+                         Margin="30 8 30 0"
+                         Name="saleNameTextBox"/>
+
+                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                       HorizontalAlignment="Left"
+                       Margin="30 30 0 0"
+                       Text="Опис"/>
+
+                <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                         Background="{StaticResource SecundaryBackgroundColor}"
+                         Tag="Вводьте сюди"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         TextWrapping="Wrap"
+                         FontWeight="SemiBold"
+                         Width="550"
+                         MinHeight="100"
+                         Margin="30 8 30 0"
+                         Name="saleDescriptionTextBox"/>
+
+
+                <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                       HorizontalAlignment="Left"
+                       Margin="30 20 0 0"
+                       Text="Фотографія"/>
+
+
+                <WrapPanel Name="photosDockPanel" Margin="30 10 30 0" Orientation="Horizontal">
+                    <Border Width="130"
+                            Height="130"
+                            CornerRadius="7"
+                            Margin="2 0 0 2"
+                            AllowDrop="True" 
+                            Drop="Button_Drop"
+                            DragOver="Button_DragOver">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Cursor" Value="{x:Null}"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gray"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <Rectangle Stroke="Gray" 
+                                   Height="130" 
+                                   StrokeThickness="1" 
+                                   StrokeDashArray="4 4"
+                                   SnapsToDevicePixels="True"
+                                   RadiusX="7"
+                                   RadiusY="7"/>
+                            <Path Data="{StaticResource Upload}"
+                              Stretch="Uniform" 
+                              Fill="{StaticResource PrimaryTextColor}" 
+                              Width="50" Height="50"
+                              HorizontalAlignment="Center">
+                                <Path.LayoutTransform>
+                                    <RotateTransform CenterX="0" CenterY="0" Angle="180" />
+                                </Path.LayoutTransform>
+                            </Path>
+                            <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                   Text="Завантажити"
+                                   HorizontalAlignment="Center"
+                                   FontSize="13"
+                                   VerticalAlignment="Center"
+                                   Margin="0 55 0 0"/>
+                            <Button Opacity="0" Click="LoadPhoto_Click"/>
+                        </Grid>
+                    </Border>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Margin="30 30 0 0">
+
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                                   HorizontalAlignment="Left"
+                                   Text="Дата закінчення акції"/>
+
+                        <DatePicker Margin="0 10 20 0"
+                                    Width="270"
+                                    Height="33"
+                                    HorizontalAlignment="Left"
+                                    Name="expireTimeDatePicker">
+                            <DatePicker.Resources>
+                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Control.Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <TextBox x:Name="PART_TextBox" 
+                                                        Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource PrimaryHeaderTextBlockStyle}"
+                       HorizontalAlignment="Left"
+                       Text="Процент знижки"/>
+
+                        <TextBox Style="{StaticResource PrimaryTextBoxStyle}"
+                                 Background="{StaticResource SecundaryBackgroundColor}"
+                                 Tag="Вводьте сюди"
+                                 FontWeight="SemiBold"
+                                 Margin="0 8 30 0"
+                                 Width="250"
+                                 Name="decreasePercentTextBox"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="30 25 0 50"
+                        HorizontalAlignment="Left"
+                        Padding="10"
+                        Name="submit"
+                        Click="add_Click"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Content="Добавити акцію"/>
+
+                    <Button Margin="10 25 0 50"
+                        HorizontalAlignment="Left"
+                        Padding="10"
+                            Name="returnBack"
+                        Click="ReturnBackClick"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Content="Повернутись назад"/>
+
+
+
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Border>
+</Page>

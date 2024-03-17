@@ -1,0 +1,279 @@
+﻿<Page x:Class="RozetkaUI.Pages.SaleProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RozetkaUI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="950" d:DesignWidth="1000"
+      Title="ProductListPage">
+
+    <Page.Resources>
+        <Style x:Key="CategoryButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="3" 
+                            Padding="{TemplateBinding Padding}"
+                                BorderThickness="1"
+                            BorderBrush="Gray">
+                            <ContentPresenter HorizontalAlignment="Stretch" 
+                                              VerticalAlignment="Stretch"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CategoryMenuButtonStyle" TargetType="Button">
+            <EventSetter Event="Button.Click" Handler="Button_Click"></EventSetter>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="3" 
+                            Padding="{TemplateBinding Padding}"
+                                BorderThickness="1"
+                            BorderBrush="Gray">
+                            <ContentPresenter HorizontalAlignment="Stretch" 
+                                              VerticalAlignment="Stretch"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DeleteProductyButtonStyle" TargetType="Button">
+            <EventSetter Event="Button.Click" Handler="DeleteProduct"></EventSetter>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="{x:Null}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="7" 
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecundaryButtonHoverColor}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <local:SalePriceConverter x:Key="SaleConverter"/>
+    </Page.Resources>
+
+    <StackPanel Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Image Source="{Binding Sale.ImagePath}"
+                   Stretch="Uniform"
+                   Height="400"/>
+            <TextBlock Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                   FontSize="35"
+                       HorizontalAlignment="Left"
+                   Margin="40 20 0 0"
+                   Text="{Binding Sale.SaleName}"
+                       Grid.Row="1"/>
+            <StackPanel Grid.Row="1">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding LoginedUser.UserRoles[0].Role.Name}" Value="Admin">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Button HorizontalAlignment="Right" 
+                        Click="AddProduct"
+                        Style="{StaticResource TransperentButtonStyle}"
+                            VerticalAlignment="Top"
+                            Margin="0 20 10 0"
+                            Padding="7">
+                    <Path Data="{StaticResource Plus}"
+                                  Stretch="Uniform"
+                                  Width="20" Height="20"
+                                  Fill="{StaticResource PrimaryBackgroundColor}"
+                                  HorizontalAlignment="Center">
+                        <Path.LayoutTransform>
+                            <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                        </Path.LayoutTransform>
+                    </Path>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <ItemsControl Margin="40 10 0 0" ItemsSource="{Binding Sale.Sales_Products}" Name="products">
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <Button Style="{StaticResource CategoryButtonStyle}"
+                                        Width="300"
+                                        Height="400"
+                                        Click="Button_Click">
+                                    <Button Background="Transparent"
+                                            BorderThickness="0"
+                                            Style="{StaticResource MyButton}">
+
+                                        <StackPanel VerticalAlignment="Top">
+                                            <Image Source="{Binding Product.Images[0].Name}"
+                                                   Stretch="Uniform"
+                                                   Height="200"
+                                                   MaxWidth="280"/>
+                                            <TextBlock Text="{Binding Product.Name}"
+                                                       TextWrapping="WrapWithOverflow"
+                                                       FontSize="16"
+                                                       Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0 0 5 0"/>
+                                            <TextBlock Text="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource SaleConverter}}"
+                                                       TextWrapping="WrapWithOverflow"
+                                                       FontSize="20"
+                                                       Foreground="Red"
+                                                       Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Button>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LoginedUser.UserRoles[0].Role.Name}" Value="Admin">
+                            <Setter Property="ItemTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource CategoryMenuButtonStyle}"
+                                                Width="300"
+                                                Height="400">
+                                            <Button Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Style="{StaticResource MyButton}">
+
+                                                <StackPanel VerticalAlignment="Top">
+                                                    <Image Source="{Binding Product.Images[0].Name}"
+                                                           Stretch="Uniform"
+                                                           Height="200"
+                                                           MaxWidth="280"/>
+                                                    <TextBlock Text="{Binding Product.Name}"
+                                                               TextWrapping="WrapWithOverflow"
+                                                               FontSize="16"
+                                                               Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                               VerticalAlignment="Center"
+                                                               Margin="0 0 5 0"/>
+                                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource SaleConverter}}"
+                                                               TextWrapping="WrapWithOverflow"
+                                                               FontSize="20"
+                                                               Foreground="Red"
+                                                               Style="{StaticResource SecundaryHeaderTextBlockStyle}"
+                                                               VerticalAlignment="Center"
+                                                               Margin="0 0 5 0"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button HorizontalAlignment="Right" 
+                                                                Style="{StaticResource DeleteProductyButtonStyle}"
+                                                                VerticalAlignment="Top"
+                                                                Margin="0 20 10 0"
+                                                                Padding="7">
+                                                            <Path Data="{StaticResource Delete}"
+                                                                  Stretch="Uniform"
+                                                                  Width="20" Height="20"
+                                                                  Fill="{StaticResource PrimaryBackgroundColor}"
+                                                                  HorizontalAlignment="Center">
+                                                                <Path.LayoutTransform>
+                                                                    <MatrixTransform Matrix="1 0 0 -1 1 0"/>
+                                                                </Path.LayoutTransform>
+                                                            </Path>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Button>
+                                        </Button>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </StackPanel>
+</Page>
+
