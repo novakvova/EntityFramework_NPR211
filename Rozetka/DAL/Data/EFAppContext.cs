@@ -23,9 +23,9 @@ namespace DAL.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                //.UseNpgsql("Server=localhost;Port=5432;Database=RozetkaDB_npr211;User Id=postgres;Password=123456;");
+                .UseNpgsql("Server=localhost;Port=5432;Database=revo;User Id=postgres;Password=123456;");
                 //.UseSqlite("DataSource=revo.db;");
-                .UseSqlServer("Server=.;Database=revo;Trusted_Connection=True;TrustServerCertificate=true;");
+               // .UseSqlServer("Server=.;Database=revo;Trusted_Connection=True;TrustServerCertificate=true;");
             //.UseSqlServer("Data Source=20.65.144.204;User ID=kaban;Password=9[nV`e7VN`0%;Initial Catalog=revo;MultipleActiveResultSets=true;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
