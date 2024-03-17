@@ -72,7 +72,8 @@ namespace BAL.Services
 
         public IEnumerable<SaleEntityDTO> GetAllSales()
         {
-            return _mapper.Map<IEnumerable<SaleEntity>, IEnumerable<SaleEntityDTO>>(_saleRepository.GetAllSales());
+            var list = _saleRepository.GetAllSales();
+            return _mapper.Map<IEnumerable<SaleEntity>, IEnumerable<SaleEntityDTO>>(list);
         }
     }
 }

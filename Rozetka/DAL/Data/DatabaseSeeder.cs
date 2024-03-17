@@ -28,13 +28,14 @@ namespace DAL.Data
         }
         private static void SeedOrderStatuses(EFAppContext dataContext)
         {
+            var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             if (!dataContext.OrderStatuses.Any())
             {
                 foreach (var order in OrderStatuses.All)
                 {
                     dataContext.OrderStatuses.Add(new OrderStatusEntity()
                     {
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateNow,
                         Name = order
                     });
                 }
@@ -43,13 +44,14 @@ namespace DAL.Data
         }
         private static void SeedRoles(EFAppContext dataContext)
         {
+            var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             if (!dataContext.Roles.Any())
             {
                 foreach (var role in Roles.All)
                 {
                     dataContext.Roles.Add(new RoleEntity()
                     {
-                        DateCreated = DateTime.Now,
+                        DateCreated = dateNow,
                         Name = role
                     });
                 }
@@ -59,6 +61,7 @@ namespace DAL.Data
 
         private static void SeedUsers(EFAppContext dataContext)
         {
+            var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             if (!dataContext.Users.Any())
             {
                 var user = new UserEntity()
@@ -68,7 +71,7 @@ namespace DAL.Data
                     Phone = "098 34 34 222",
                     Email = "admin@gmail.com",
                     Password = Hash("123456"),
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
                 dataContext.Users.Add(user);
                 dataContext.SaveChanges();
@@ -103,38 +106,39 @@ namespace DAL.Data
         {
             if (!dataContext.Categories.Any())
             {
+                var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 var noutbuki = new CategoryEntity
                 {
                     Name = "Ноутбуки",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateNow,
                     Image = @"https://video.rozetka.com.ua/img_superportal/kompyutery_i_noutbuki/noutbuki.png"
                 };
 
                 var kompyutery = new CategoryEntity
                 {
                     Name = "Комп'ютери",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateNow,
                     Image = @"https://video.rozetka.com.ua/img_superportal/kompyutery_i_noutbuki/kompyutery.png"
                 };
 
                 var monitory = new CategoryEntity
                 {
                     Name = "Монітори",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateNow,
                     Image = @"https://video.rozetka.com.ua/img_superportal/kompyutery_i_noutbuki/monitory.png"
                 };
                 
                 var mobilnye_telefony = new CategoryEntity
                 {
                     Name = "Мобільні телефони",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateNow,
                     Image = @"https://video.rozetka.com.ua/img_superportal/smartfony_tv_i_elektronika/mobilnye_telefony.jpg"
                 };
                 
                 var televizory = new CategoryEntity
                 {
                     Name = "Телевізори",
-                    DateCreated = DateTime.Now,
+                    DateCreated = dateNow,
                     Image = @"https://video.rozetka.com.ua/img_superportal/smartfony_tv_i_elektronika/televizory.jpg"
                 };
 
@@ -152,6 +156,7 @@ namespace DAL.Data
             {
                 ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
                 var categories = categoryRepository.GetAll();
+                var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
 
                 #region Ноутбуки
                 var notebook = categories.Where(c => c.Name == "Ноутбуки").First().Id;
@@ -162,7 +167,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" IPS (1920x1080) Full HD 144 Гц, матовий / AMD Ryzen 5 5500U (2.1 - 4.0 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.15 кг / чорний",
                     Price = 36999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var macBookAir = new ProductEntity
@@ -171,7 +176,7 @@ namespace DAL.Data
                     Description = "Екран 13.3\" Retina (2560x1600) WQXGA, глянсовий / Apple M1 / RAM 8 ГБ / SSD 256 ГБ / Apple M1 Graphics / Wi-Fi / Bluetooth / macOS Big Sur / 1.29 кг / сріблястий",
                     Price = 42999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var lenovoIdeaPad = new ProductEntity
@@ -180,7 +185,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" IPS (1920x1080) Full HD, матовий / Intel Core i5-11320H (2.5 - 4.5 ГГц) / RAM 8 ГБ / SSD 256 ГБ / nVidia GeForce GTX 1650, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.25 кг / чорний",
                     Price = 29999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var asusTufGaming = new ProductEntity
@@ -189,7 +194,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" IPS (1920x1080) Full HD 144 Гц, матовий / Intel Core i5-11400H (2.7 - 4.5 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.3 кг / чорний",
                     Price = 40999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var asusRogStrix = new ProductEntity
@@ -198,7 +203,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" IPS (1920x1080) Full HD 144 Гц, матовий / AMD Ryzen 7 4800H (2.9 - 4.2 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / без ОС / 2.1 кг / сірий",
                     Price = 39999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var lenovoLegion5 = new ProductEntity
@@ -207,7 +212,7 @@ namespace DAL.Data
                     Description = "Экран 15.6\" IPS (2560x1440) WQHD 165 Гц, матовый / Intel Core i7-12700H (3.5 - 4.7 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3070, 8 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.4 кг / серый",
                     Price = 75999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var asusZenBookFlip15 = new ProductEntity
@@ -216,7 +221,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" IPS (1920x1080) Full HD, Multi-touch, глянсовий / AMD Ryzen 7 5700U (1.8 — 4.3 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce MX450, 2 ГБ / без ОД / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.9 кг / сірий / стилус",
                     Price = 34999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var lenovoYoga7 = new ProductEntity
@@ -225,7 +230,7 @@ namespace DAL.Data
                     Description = "Екран 14\" IPS (1920x1080) Full HD, Multi-Touch, глянсовий / AMD Ryzen 7 5800U (1.9 - 4.4 ГГц) / RAM 16 ГБ / SSD 512 ГБ / AMD Radeon Graphics / без ОД / Wi-Fi / Bluetooth / веб-камера / Windows 11 Home 64bit / 1.45 кг / сірий",
                     Price = 47777,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var acerAspire3 = new ProductEntity
@@ -234,7 +239,7 @@ namespace DAL.Data
                     Description = "Екран 15.6\" (1920x1080) Full HD, матовий / Intel Celeron N4500 (1.1 - 2.8 ГГц) / RAM 4 ГБ / SSD 128 ГБ / Intel UHD Graphics / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.7 кг / срібний",
                     Price = 12999,
                     CategoryId = notebook,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.Products.Add(acerAspire);
@@ -256,7 +261,7 @@ namespace DAL.Data
                     Description = "Intel Core i5-10400F (2.9 — 4.3 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / nVidia GeForce GTX 1660, 6 ГБ / без ОД / LAN / без ОС",
                     Price = 28999,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var QUBE = new ProductEntity
@@ -265,7 +270,7 @@ namespace DAL.Data
                     Description = "Intel Core i5-10400F (2.9 — 4.3 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / nVidia GeForce RTX 3060, 12 ГБ / без ОД / LAN / без ОС",
                     Price = 35799,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var artlineGamingX88 = new ProductEntity
@@ -274,7 +279,7 @@ namespace DAL.Data
                     Description = "AMD Ryzen 9 5900X (3.7 — 4.8 ГГц) / RAM 32 ГБ / SSD 1 ТБ / nVidia GeForce RTX 3080, 10 ГБ / без ОД / LAN / без ОС",
                     Price = 75999,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var COBRAAdvanced = new ProductEntity
@@ -283,7 +288,7 @@ namespace DAL.Data
                     Description = "Intel Core i5-10400F (2.9 - 4.3 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 240 ГБ / GeForce GTX 1650, 4 ГБ / без ОД / LAN / Linux",
                     Price = 22799,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var artlineGaming1 = new ProductEntity
@@ -292,7 +297,7 @@ namespace DAL.Data
                     Description = "Intel Core i5-12400F (2.5 — 4.4 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС",
                     Price = 24799,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ARTLINEOverlord = new ProductEntity
@@ -301,7 +306,7 @@ namespace DAL.Data
                     Description = "Intel Core i5-10400F (2.9 - 4.3 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3060, 12 ГБ / без ОД / LAN / без ОС",
                     Price = 37499,
                     CategoryId = computers,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.Products.Add(artlineGaming);
@@ -320,7 +325,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n28\"\r\nМаксимальна роздільна здатність дисплея\r\n3840x2160 (4K UltraHD)\r\nЧас реакції матриці\r\n1 мс\r\nЯскравість дисплея\r\n400 кд/м2\r\nТип матриці\r\nIPS\r\nКонтрастність дисплея\r\n1000:1 (Typ)\r\nОсобливості\r\nFlicker-Free\r\nUSB-концентратор\r\nБезрамковий (Сinema screen)\r\nПоворотний екран (Pivot)\r\nРегулювання за висотою",
                     Price = 21999,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var asusTUF = new ProductEntity
@@ -329,7 +334,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n24.5\"\r\nМаксимальна роздільна здатність дисплея\r\n1920x1080 (FullHD)\r\nЧас реакції матриці\r\n1 мс MPRT\r\nЯскравість дисплея\r\n300 кд/м²\r\nТип матриці\r\nIPS\r\nКонтрастність дисплея\r\n1000:1\r\nОсобливості\r\nFlicker-Free\r\nБезрамковий (Сinema screen)\r\nПоворотний екран (Pivot)\r\nРегулювання за висотою",
                     Price = 9399,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var samsungCurved = new ProductEntity
@@ -338,7 +343,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n23.5\"\r\nМаксимальна роздільна здатність дисплея\r\n1920x1080 (FullHD)\r\nЧас реакції матриці\r\n4 мс\r\nЯскравість дисплея\r\n250 кд/м²\r\nТип матриці\r\nVA\r\nКонтрастність дисплея\r\n3000:1",
                     Price = 5199,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var dell = new ProductEntity
@@ -347,7 +352,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n27\"\r\nМаксимальна роздільна здатність дисплея\r\n3840x2160 (4K UltraHD)\r\nЧас реакції матриці\r\n4 мс\r\nЯскравість дисплея\r\n350 кд/м²\r\nТип матриці\r\nIPS\r\nКонтрастність дисплея\r\n1300:1",
                     Price = 13599,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var asusProArtDisplay = new ProductEntity
@@ -356,7 +361,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n27\"\r\nМаксимальна роздільна здатність дисплея\r\n2560x1440 (2K QHD)\r\nЧас реакції матриці\r\n5 мс\r\nЯскравість дисплея\r\n350 кд/м²\r\nТип матриці\r\nIPS\r\nКонтрастність дисплея\r\n1000:1",
                     Price = 16499,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var philips = new ProductEntity
@@ -365,7 +370,7 @@ namespace DAL.Data
                     Description = "Діагональ дисплея\r\n23.8\"\r\nМаксимальна роздільна здатність дисплея\r\n1920x1080 (FullHD)\r\nЧас реакції матриці\r\n1 мс (MPRT), 4 мс (серый к серому)\r\nЯскравість дисплея\r\n250 кд/м²\r\nТип матриці\r\nIPS\r\nКонтрастність дисплея\r\n1100:1",
                     Price = 7799,
                     CategoryId = monitor,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.Products.Add(samsungOdyssey);
@@ -384,7 +389,7 @@ namespace DAL.Data
                     Description = "Екран (6.1\", OLED (Super Retina XDR), 2532x1170) / Apple A15 Bionic / подвійна основна камера: 12 Мп + 12 Мп, фронтальна камера: 12 Мп / 128 ГБ вбудованої пам'яті / 3G / LTE / 5G / GPS / Nano-SIM, eSIM / iOS 15",
                     Price = 35999,
                     CategoryId = phone,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.Products.Add(appleiPhone13);
@@ -398,7 +403,7 @@ namespace DAL.Data
                     Description = "Діагональ екрана\r\n50\"\r\nРоздільна здатність\r\n3840x2160\r\nПлатформа\r\nTizen\r\nДіапазони цифрового тюнера\r\nDVB-C\r\nDVB-S2\r\nDVB-T2",
                     Price = 19799,
                     CategoryId = tv,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.Products.Add(samsung);
@@ -414,6 +419,8 @@ namespace DAL.Data
                 IProductRepository productRepository = new ProductRepository(dataContext);
                 var products = productRepository.GetAll();
 
+                var dateNow = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+
                 #region Ноутбуки
                 #region Acer Aspire 7 A715-42G-R8BL (NH.QDLEU.008) Charcoal Black
                 var AcerAspire = products.Where(x => x.Name == "Acer Aspire 7 A715-42G-R8BL (NH.QDLEU.008) Charcoal Black").First().Id;
@@ -423,7 +430,7 @@ namespace DAL.Data
                    Name = @"https://content1.rozetka.com.ua/goods/images/big/254116608.jpg",
                    Priority = 1,
                    ProductId = AcerAspire,
-                   DateCreated = DateTime.Now
+                   DateCreated = dateNow
                 };
 
                 var AcerAspirephoto2 = new ProductImageEntity
@@ -431,7 +438,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/290848838.jpg",
                     Priority = 2,
                     ProductId = AcerAspire,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspirephoto3 = new ProductImageEntity
@@ -439,7 +446,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/254116609.jpg",
                     Priority = 3,
                     ProductId = AcerAspire,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspirephoto4 = new ProductImageEntity
@@ -447,7 +454,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/254116610.jpg",
                     Priority = 4,
                     ProductId = AcerAspire,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspirephoto5 = new ProductImageEntity
@@ -455,7 +462,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/254116611.jpg",
                     Priority = 5,
                     ProductId = AcerAspire,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AcerAspirephoto1);
@@ -472,7 +479,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/215770075.jpg",
                     Priority = 1,
                     ProductId = MacBookAir,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var MacBookAirphoto2 = new ProductImageEntity
@@ -480,7 +487,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/215770142.jpg",
                     Priority = 2,
                     ProductId = MacBookAir,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var MacBookAirphoto3 = new ProductImageEntity
@@ -488,7 +495,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/215770223.jpg",
                     Priority = 3,
                     ProductId = MacBookAir,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var MacBookAirphoto4 = new ProductImageEntity
@@ -496,7 +503,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/215770290.jpg",
                     Priority = 4,
                     ProductId = MacBookAir,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var MacBookAirphoto5 = new ProductImageEntity
@@ -504,7 +511,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/215770341.jpg",
                     Priority = 5,
                     ProductId = MacBookAir,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(MacBookAirphoto1);
@@ -521,7 +528,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/280598520.jpg",
                     Priority = 1,
                     ProductId = LenovoIdeaPad,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoIdeaPadphoto2 = new ProductImageEntity
@@ -529,7 +536,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/284974732.jpg",
                     Priority = 2,
                     ProductId = LenovoIdeaPad,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoIdeaPadphoto3 = new ProductImageEntity
@@ -537,7 +544,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/280598574.jpg",
                     Priority = 3,
                     ProductId = LenovoIdeaPad,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoIdeaPadphoto4 = new ProductImageEntity
@@ -545,7 +552,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/280598621.jpg",
                     Priority = 4,
                     ProductId = LenovoIdeaPad,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoIdeaPadphoto5 = new ProductImageEntity
@@ -553,7 +560,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/280598671.jpg",
                     Priority = 5,
                     ProductId = LenovoIdeaPad,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(LenovoIdeaPadphoto1);
@@ -570,7 +577,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/283529272.jpg",
                     Priority = 1,
                     ProductId = AsusTufGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTufGamingphoto2 = new ProductImageEntity
@@ -578,7 +585,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/283529275.jpg",
                     Priority = 2,
                     ProductId = AsusTufGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTufGamingphoto3 = new ProductImageEntity
@@ -586,7 +593,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/283529281.jpg",
                     Priority = 3,
                     ProductId = AsusTufGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTufGamingphoto4 = new ProductImageEntity
@@ -594,7 +601,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/283529282.jpg",
                     Priority = 4,
                     ProductId = AsusTufGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTufGamingphoto5 = new ProductImageEntity
@@ -602,7 +609,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/283529284.jpg",
                     Priority = 5,
                     ProductId = AsusTufGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AsusTufGamingphoto1);
@@ -619,7 +626,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/283528165.jpg",
                     Priority = 1,
                     ProductId = AsusRogStrix,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusRogStrixphoto2 = new ProductImageEntity
@@ -627,7 +634,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/283528166.jpg",
                     Priority = 2,
                     ProductId = AsusRogStrix,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusRogStrixphoto3 = new ProductImageEntity
@@ -635,7 +642,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/283528167.jpg",
                     Priority = 3,
                     ProductId = AsusRogStrix,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusRogStrixphoto4 = new ProductImageEntity
@@ -643,7 +650,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/283528168.jpg",
                     Priority = 4,
                     ProductId = AsusRogStrix,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusRogStrixphoto5 = new ProductImageEntity
@@ -651,7 +658,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/283528171.jpg",
                     Priority = 5,
                     ProductId = AsusRogStrix,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AsusRogStrixphoto1);
@@ -668,7 +675,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/308669792.jpg",
                     Priority = 1,
                     ProductId = LenovoLegion5,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoLegion5photo2 = new ProductImageEntity
@@ -676,7 +683,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/308669793.jpg",
                     Priority = 2,
                     ProductId = LenovoLegion5,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoLegion5photo3 = new ProductImageEntity
@@ -684,7 +691,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/308669794.jpg",
                     Priority = 3,
                     ProductId = LenovoLegion5,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoLegion5photo4 = new ProductImageEntity
@@ -692,7 +699,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/308669797.jpg",
                     Priority = 4,
                     ProductId = LenovoLegion5,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoLegion5photo5 = new ProductImageEntity
@@ -700,7 +707,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/308669795.jpg",
                     Priority = 5,
                     ProductId = LenovoLegion5,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(LenovoLegion5photo1);
@@ -717,7 +724,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/300283555.jpg",
                     Priority = 1,
                     ProductId = AsusZenBookFlip15,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusZenBookFlip15photo2 = new ProductImageEntity
@@ -725,7 +732,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/300283557.jpg",
                     Priority = 2,
                     ProductId = AsusZenBookFlip15,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusZenBookFlip15photo3 = new ProductImageEntity
@@ -733,7 +740,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/300283558.jpg",
                     Priority = 3,
                     ProductId = AsusZenBookFlip15,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusZenBookFlip15photo4 = new ProductImageEntity
@@ -741,7 +748,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/300283561.jpg",
                     Priority = 4,
                     ProductId = AsusZenBookFlip15,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusZenBookFlip15photo5 = new ProductImageEntity
@@ -749,7 +756,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/300283565.jpg",
                     Priority = 5,
                     ProductId = AsusZenBookFlip15,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AsusZenBookFlip15photo1);
@@ -766,7 +773,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/254116608.jpg",
                     Priority = 1,
                     ProductId = LenovoYoga7,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoYoga7photo2 = new ProductImageEntity
@@ -774,7 +781,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/247773737.jpg",
                     Priority = 2,
                     ProductId = LenovoYoga7,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoYoga7photo3 = new ProductImageEntity
@@ -782,7 +789,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/247773740.jpg",
                     Priority = 3,
                     ProductId = LenovoYoga7,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoYoga7photo4 = new ProductImageEntity
@@ -790,7 +797,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/247773744.jpg",
                     Priority = 4,
                     ProductId = LenovoYoga7,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var LenovoYoga7photo5 = new ProductImageEntity
@@ -798,7 +805,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/247773745.jpg",
                     Priority = 5,
                     ProductId = LenovoYoga7,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(LenovoYoga7photo1);
@@ -815,7 +822,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/163390217.jpg",
                     Priority = 1,
                     ProductId = AcerAspire3,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspire3photo2 = new ProductImageEntity
@@ -823,7 +830,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/163390218.jpg",
                     Priority = 2,
                     ProductId = AcerAspire3,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspire3photo3 = new ProductImageEntity
@@ -831,7 +838,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/163390219.jpg",
                     Priority = 3,
                     ProductId = AcerAspire3,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspire3photo4 = new ProductImageEntity
@@ -839,7 +846,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/163390220.jpg",
                     Priority = 4,
                     ProductId = AcerAspire3,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AcerAspire3photo5 = new ProductImageEntity
@@ -847,7 +854,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/163390221.jpg",
                     Priority = 5,
                     ProductId = AcerAspire3,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AcerAspire3photo1);
@@ -866,7 +873,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/244859893.jpg",
                     Priority = 1,
                     ProductId = ArtlineGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingphoto2 = new ProductImageEntity
@@ -874,7 +881,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/244859895.jpg",
                     Priority = 2,
                     ProductId = ArtlineGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingphoto3 = new ProductImageEntity
@@ -882,7 +889,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/244859897.jpg",
                     Priority = 3,
                     ProductId = ArtlineGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingphoto4 = new ProductImageEntity
@@ -890,7 +897,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/244859902.jpg",
                     Priority = 4,
                     ProductId = ArtlineGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingphoto5 = new ProductImageEntity
@@ -898,7 +905,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/244859905.jpg",
                     Priority = 5,
                     ProductId = ArtlineGaming,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(ArtlineGamingphoto1);
@@ -915,7 +922,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/255402319.jpg",
                     Priority = 1,
                     ProductId = QUBE,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var QUBEphoto2 = new ProductImageEntity
@@ -923,7 +930,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/255402320.jpg",
                     Priority = 2,
                     ProductId = QUBE,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var QUBEphoto3 = new ProductImageEntity
@@ -931,7 +938,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/255402321.jpg",
                     Priority = 3,
                     ProductId = QUBE,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var QUBEphoto4 = new ProductImageEntity
@@ -939,7 +946,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/255402322.jpg",
                     Priority = 4,
                     ProductId = QUBE,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var QUBEphoto5 = new ProductImageEntity
@@ -947,7 +954,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/255402328.jpg",
                     Priority = 5,
                     ProductId = QUBE,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(QUBEphoto1);
@@ -964,7 +971,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/308537718.jpg",
                     Priority = 1,
                     ProductId = ArtlineGamingX88,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingX88photo2 = new ProductImageEntity
@@ -972,7 +979,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/308537725.jpg",
                     Priority = 2,
                     ProductId = ArtlineGamingX88,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingX88photo3 = new ProductImageEntity
@@ -980,7 +987,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/308537724.jpg",
                     Priority = 3,
                     ProductId = ArtlineGamingX88,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingX88photo4 = new ProductImageEntity
@@ -988,7 +995,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/308537733.jpg",
                     Priority = 4,
                     ProductId = ArtlineGamingX88,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGamingX88photo5 = new ProductImageEntity
@@ -996,7 +1003,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/308537734.jpg",
                     Priority = 5,
                     ProductId = ArtlineGamingX88,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(ArtlineGamingX88photo1);
@@ -1013,7 +1020,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/286272849.jpg",
                     Priority = 1,
                     ProductId = COBRAAdvanced,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var COBRAAdvancedphoto2 = new ProductImageEntity
@@ -1021,7 +1028,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/286272851.jpg",
                     Priority = 2,
                     ProductId = COBRAAdvanced,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var COBRAAdvancedphoto3 = new ProductImageEntity
@@ -1029,7 +1036,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/286272852.jpg",
                     Priority = 3,
                     ProductId = COBRAAdvanced,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var COBRAAdvancedphoto4 = new ProductImageEntity
@@ -1037,7 +1044,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/286272853.jpg",
                     Priority = 4,
                     ProductId = COBRAAdvanced,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var COBRAAdvancedphoto5 = new ProductImageEntity
@@ -1045,7 +1052,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/286272855.jpg",
                     Priority = 5,
                     ProductId = COBRAAdvanced,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(COBRAAdvancedphoto1);
@@ -1062,7 +1069,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/253652590.jpg",
                     Priority = 1,
                     ProductId = ArtlineGaming1,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGaming1photo2 = new ProductImageEntity
@@ -1070,7 +1077,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/253652591.jpg",
                     Priority = 2,
                     ProductId = ArtlineGaming1,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGaming1photo3 = new ProductImageEntity
@@ -1078,7 +1085,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/253652592.jpg",
                     Priority = 3,
                     ProductId = ArtlineGaming1,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGaming1photo4 = new ProductImageEntity
@@ -1086,7 +1093,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/253652595.jpg",
                     Priority = 4,
                     ProductId = ArtlineGaming1,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ArtlineGaming1photo5 = new ProductImageEntity
@@ -1094,7 +1101,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/253652596.jpg",
                     Priority = 5,
                     ProductId = ArtlineGaming1,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(ArtlineGaming1photo1);
@@ -1111,7 +1118,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/276447013.jpg",
                     Priority = 1,
                     ProductId = ARTLINEOverlord,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ARTLINEOverlordphoto2 = new ProductImageEntity
@@ -1119,7 +1126,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/276447017.jpg",
                     Priority = 2,
                     ProductId = ARTLINEOverlord,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ARTLINEOverlordphoto3 = new ProductImageEntity
@@ -1127,7 +1134,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/276447020.jpg",
                     Priority = 3,
                     ProductId = ARTLINEOverlord,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ARTLINEOverlordphoto4 = new ProductImageEntity
@@ -1135,7 +1142,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/276447027.jpg",
                     Priority = 4,
                     ProductId = ARTLINEOverlord,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var ARTLINEOverlordphoto5 = new ProductImageEntity
@@ -1143,7 +1150,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/276447030.jpg",
                     Priority = 5,
                     ProductId = ARTLINEOverlord,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(ARTLINEOverlordphoto1);
@@ -1162,7 +1169,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/250044076.jpg",
                     Priority = 1,
                     ProductId = SamsungOdyssey,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungOdysseyphoto2 = new ProductImageEntity
@@ -1170,7 +1177,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/250044127.jpg",
                     Priority = 2,
                     ProductId = SamsungOdyssey,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungOdysseyphoto3 = new ProductImageEntity
@@ -1178,7 +1185,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/250044109.jpg",
                     Priority = 3,
                     ProductId = SamsungOdyssey,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungOdysseyphoto4 = new ProductImageEntity
@@ -1186,7 +1193,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/250044106.jpg",
                     Priority = 4,
                     ProductId = SamsungOdyssey,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungOdysseyphoto5 = new ProductImageEntity
@@ -1194,7 +1201,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/250044088.jpg",
                     Priority = 5,
                     ProductId = SamsungOdyssey,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(SamsungOdysseyphoto1);
@@ -1211,7 +1218,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/168721089.jpg",
                     Priority = 1,
                     ProductId = AsusTUF,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTUFphoto2 = new ProductImageEntity
@@ -1219,7 +1226,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/168721090.jpg",
                     Priority = 2,
                     ProductId = AsusTUF,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTUFphoto3 = new ProductImageEntity
@@ -1227,7 +1234,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/168721091.jpg",
                     Priority = 3,
                     ProductId = AsusTUF,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTUFphoto4 = new ProductImageEntity
@@ -1235,7 +1242,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/168721092.jpg",
                     Priority = 4,
                     ProductId = AsusTUF,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusTUFphoto5 = new ProductImageEntity
@@ -1243,7 +1250,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/168721093.jpg",
                     Priority = 5,
                     ProductId = AsusTUF,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AsusTUFphoto1);
@@ -1260,7 +1267,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/106654984.jpg",
                     Priority = 1,
                     ProductId = SamsungCurved,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungCurvedphoto2 = new ProductImageEntity
@@ -1268,7 +1275,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/106655028.jpg",
                     Priority = 2,
                     ProductId = SamsungCurved,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungCurvedphoto3 = new ProductImageEntity
@@ -1276,7 +1283,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/106655088.jpg",
                     Priority = 3,
                     ProductId = SamsungCurved,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungCurvedphoto4 = new ProductImageEntity
@@ -1284,7 +1291,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/106655100.jpg",
                     Priority = 4,
                     ProductId = SamsungCurved,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var SamsungCurvedphoto5 = new ProductImageEntity
@@ -1292,7 +1299,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/106655044.jpg",
                     Priority = 5,
                     ProductId = SamsungCurved,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(SamsungCurvedphoto1);
@@ -1309,7 +1316,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/177849855.jpg",
                     Priority = 1,
                     ProductId = Dell,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Dellphoto2 = new ProductImageEntity
@@ -1317,7 +1324,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/177849862.jpg",
                     Priority = 2,
                     ProductId = Dell,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Dellphoto3 = new ProductImageEntity
@@ -1325,7 +1332,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/177849860.jpg",
                     Priority = 3,
                     ProductId = Dell,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Dellphoto4 = new ProductImageEntity
@@ -1333,7 +1340,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/177849857.jpg",
                     Priority = 4,
                     ProductId = Dell,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Dellphoto5 = new ProductImageEntity
@@ -1341,7 +1348,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/177849863.jpg",
                     Priority = 5,
                     ProductId = Dell,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(Dellphoto1);
@@ -1358,7 +1365,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/176729088.jpg",
                     Priority = 1,
                     ProductId = AsusProArtDisplay,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusProArtDisplayphoto2 = new ProductImageEntity
@@ -1366,7 +1373,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/176729087.jpg",
                     Priority = 2,
                     ProductId = AsusProArtDisplay,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusProArtDisplayphoto3 = new ProductImageEntity
@@ -1374,7 +1381,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/176729090.jpg",
                     Priority = 3,
                     ProductId = AsusProArtDisplay,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusProArtDisplayphoto4 = new ProductImageEntity
@@ -1382,7 +1389,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/176729089.jpg",
                     Priority = 4,
                     ProductId = AsusProArtDisplay,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AsusProArtDisplayphoto5 = new ProductImageEntity
@@ -1390,7 +1397,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/176729084.jpg",
                     Priority = 5,
                     ProductId = AsusProArtDisplay,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AsusProArtDisplayphoto1);
@@ -1407,7 +1414,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/302356540.jpg",
                     Priority = 1,
                     ProductId = Philips,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Philipsphoto2 = new ProductImageEntity
@@ -1415,7 +1422,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/301346716.jpg",
                     Priority = 2,
                     ProductId = Philips,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Philipsphoto3 = new ProductImageEntity
@@ -1423,7 +1430,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/301346715.jpg",
                     Priority = 3,
                     ProductId = Philips,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Philipsphoto4 = new ProductImageEntity
@@ -1431,7 +1438,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/301346711.jpg",
                     Priority = 4,
                     ProductId = Philips,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Philipsphoto5 = new ProductImageEntity
@@ -1439,7 +1446,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/301346712.jpg",
                     Priority = 5,
                     ProductId = Philips,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(Philipsphoto1);
@@ -1458,7 +1465,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/221214151.jpg",
                     Priority = 1,
                     ProductId = AppleiPhone13,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AppleiPhone13photo2 = new ProductImageEntity
@@ -1466,7 +1473,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/221023395.jpg",
                     Priority = 2,
                     ProductId = AppleiPhone13,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AppleiPhone13photo3 = new ProductImageEntity
@@ -1474,7 +1481,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/221214152.jpg",
                     Priority = 3,
                     ProductId = AppleiPhone13,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AppleiPhone13photo4 = new ProductImageEntity
@@ -1482,7 +1489,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/221214153.jpg",
                     Priority = 4,
                     ProductId = AppleiPhone13,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var AppleiPhone13photo5 = new ProductImageEntity
@@ -1490,7 +1497,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/221214154.jpg",
                     Priority = 5,
                     ProductId = AppleiPhone13,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(AppleiPhone13photo1);
@@ -1509,7 +1516,7 @@ namespace DAL.Data
                     Name = @"https://content.rozetka.com.ua/goods/images/big/303985202.jpg",
                     Priority = 1,
                     ProductId = Samsung,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Samsungphoto2 = new ProductImageEntity
@@ -1517,7 +1524,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/303985203.jpg",
                     Priority = 2,
                     ProductId = Samsung,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Samsungphoto3 = new ProductImageEntity
@@ -1525,7 +1532,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/303985204.jpg",
                     Priority = 3,
                     ProductId = Samsung,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Samsungphoto4 = new ProductImageEntity
@@ -1533,7 +1540,7 @@ namespace DAL.Data
                     Name = @"https://content1.rozetka.com.ua/goods/images/big/303985205.jpg",
                     Priority = 4,
                     ProductId = Samsung,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 var Samsungphoto5 = new ProductImageEntity
@@ -1541,7 +1548,7 @@ namespace DAL.Data
                     Name = @"https://content2.rozetka.com.ua/goods/images/big/303985206.jpg",
                     Priority = 5,
                     ProductId = Samsung,
-                    DateCreated = DateTime.Now
+                    DateCreated = dateNow
                 };
 
                 dataContext.ProductImages.Add(Samsungphoto1);

@@ -50,7 +50,7 @@ namespace DAL.Data
             modelBuilder.Entity<OrderItemEntity>().HasQueryFilter(p => !p.IsDelete);
             modelBuilder.Entity<OrderEntity>().HasQueryFilter(p => !p.IsDelete);
             modelBuilder.Entity<SaleEntity>().HasQueryFilter(p => !p.IsDelete);
-            modelBuilder.Entity<Sales_ProductEntity>().HasQueryFilter(p => DateTime.Now < p.Sale.ExpireTime);
+            modelBuilder.Entity<Sales_ProductEntity>().HasQueryFilter(p => DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) < p.Sale.ExpireTime);
             modelBuilder.Entity<RoleEntity>().HasQueryFilter(p => !p.IsDelete);
         }
     }
