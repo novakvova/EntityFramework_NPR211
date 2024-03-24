@@ -456,7 +456,7 @@ namespace RozetkaUI.Pages
                 short priority = 0;
                 foreach (var image in images)
                 {
-                    if (!image.Contains(@"https://") && !image.Contains(@"solido.tk") && !image.Contains(@"rozetka.com"))
+                    if (!image.Contains(@"http://") && !image.Contains(@"localhost:5006") && !image.Contains(@"rozetka.com"))
                     {
                         imagesList.Add(new ProductImageEntityDTO()
                         {

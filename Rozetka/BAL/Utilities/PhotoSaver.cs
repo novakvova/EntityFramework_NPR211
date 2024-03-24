@@ -21,12 +21,13 @@ namespace BAL.Utilities
         public static string UploadImage(byte[] imageBytes)
         {
             string base64 = Convert.ToBase64String(imageBytes);
-            string server = "https://solido.tk";
+            //string server = "https://solido.tk";
+            string server = "http://localhost:5006";
             UploadDTO upload = new UploadDTO();
             upload.Photo = base64;
             string json = JsonConvert.SerializeObject(upload);
             byte[] bytes = Encoding.UTF8.GetBytes(json);
-            WebRequest request = WebRequest.Create($"{server}/api/account/upload");
+            WebRequest request = WebRequest.Create($"{server}/api/content/upload");
             request.Method = "POST";
             request.ContentType = "application/json";
             using (var stream = request.GetRequestStream())

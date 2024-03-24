@@ -401,7 +401,7 @@ namespace RozetkaUI.Pages
             {
                 if (photo != null)
                 {
-                    if (!photo.Contains(@"https://") && !photo.Contains(@"solido.tk") && !photo.Contains(@"rozetka.com"))
+                    if (!photo.Contains(@"http://") && !photo.Contains(@"localhost:5006") && !photo.Contains(@"rozetka.com"))
                         photo = PhotoSaver.UploadImage(File.ReadAllBytes(photo));
                     else
                         photo = "https://" + photo;
