@@ -58,7 +58,8 @@ namespace RozetkaUI
                     Settings.Default.Login = string.Empty;
                     Settings.Default.Password = string.Empty;
                 }
-
+                if(this.navBar.Categories==null)
+                    this.navBar.Categories = new List<CategoryEntityDTO>();
                 CollectionViewSource.GetDefaultView(this.navBar.Categories).Refresh();
                 _loginedUser = value;
                 OnLoginedUserChanged?.Invoke();
