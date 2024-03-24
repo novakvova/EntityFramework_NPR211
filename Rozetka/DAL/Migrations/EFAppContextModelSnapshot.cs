@@ -37,7 +37,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblBaskets");
+                    b.ToTable("tblBaskets", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.CategoryEntity", b =>
@@ -65,7 +65,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblCategories");
+                    b.ToTable("tblCategories", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.OrderEntity", b =>
@@ -94,7 +94,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblOrders");
+                    b.ToTable("tblOrders", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.OrderItemEntity", b =>
@@ -129,7 +129,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblOrderItems");
+                    b.ToTable("tblOrderItems", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.OrderStatusEntity", b =>
@@ -153,7 +153,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblOrderStatuses");
+                    b.ToTable("tblOrderStatuses", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.ProductEntity", b =>
@@ -189,7 +189,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("tblProducts");
+                    b.ToTable("tblProducts", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.ProductImageEntity", b =>
@@ -221,7 +221,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblProductImages");
+                    b.ToTable("tblProductImages", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.RoleEntity", b =>
@@ -245,7 +245,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblRoles");
+                    b.ToTable("tblRoles", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.SaleEntity", b =>
@@ -284,7 +284,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblSales");
+                    b.ToTable("tblSales", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.Sales_ProductEntity", b =>
@@ -299,7 +299,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblSales_ProductEnity");
+                    b.ToTable("tblSales_ProductEnity", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.UserEntity", b =>
@@ -341,7 +341,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblUsers");
+                    b.ToTable("tblUsers", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.UserRoleEntity", b =>
@@ -356,7 +356,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tblUserRoles");
+                    b.ToTable("tblUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Data.Entities.BasketEntity", b =>
